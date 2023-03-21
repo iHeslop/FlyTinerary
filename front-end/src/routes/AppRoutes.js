@@ -10,14 +10,6 @@ export const AppRoutes = (props) => {
   return (
     <Routes>
       <Route exact path="/" element={<Home />} />
-
-      {/*      <Route path="/login" element={<Login />} />
-
-      <Route path="/itinerary" element={<Itinerary />} />
-
-      <Route path="/flights" element={<Flights />} /> */}
-
-      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 };
