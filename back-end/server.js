@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 require("dotenv").config();
 require("./dbConnect");
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to my MySQL application." });
@@ -19,5 +21,5 @@ const Controllers = require("./controllers");
 
 app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}.`);
-  await Controllers.airportController.storeAirports();
+  // await Controllers.airportController.storeAirports();
 });

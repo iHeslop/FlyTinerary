@@ -4,10 +4,10 @@ const axios = require("axios");
 
 const options = {
   method: "GET",
-  url: "https://flight-radar1.p.rapidapi.com/airports/list",
+  url: "https://priceline-com-provider.p.rapidapi.com/v2/flight/downloadAirports",
   headers: {
     "X-RapidAPI-Key": "d5d47b738amsh0218173db374270p186c18jsnae1665f158e0",
-    "X-RapidAPI-Host": "flight-radar1.p.rapidapi.com",
+    "X-RapidAPI-Host": "priceline-com-provider.p.rapidapi.com",
   },
 };
 
@@ -54,19 +54,17 @@ const deleteAirports = (req, res) => {
 };
 
 const storeAirports = async (req, res) => {
+  //add if statement if already filled out
   let data = await axios.request(options);
-  let apiData = data.data;
-  console.log(apiData);
-  let airportData = apiData.map((airport) => {
+  let apiData = data.data["getSharedBOF2.Downloads.Air.Airports"];
+  let airportsArray = Object.values(apiData.results.airports);
+  let airportData = airportsArray.map((airport) => {
     return {
-      id: airport.id,
-      name: airport.name,
       iata: airport.iata,
-      city: airport.city,
-      lat: airport.lat,
-      lon: airport.lon,
-      country: airport.country,
-      countryId: airport.countryId,
+      name: airport.airport,
+      city: airport.city_name,
+      lat: airport.latitude,
+      lon: airport.longitude,
     };
   });
   console.log(airportData);
@@ -75,14 +73,11 @@ const storeAirports = async (req, res) => {
     let created = await Models.Airport.findOrCreate({
       where: { name: airport.name },
       defaults: {
-        id: airport.id,
-        name: airport.name,
         iata: airport.iata,
+        name: airport.name,
         city: airport.city,
         lat: airport.lat,
         lon: airport.lon,
-        country: airport.country,
-        countryId: airport.countryId,
       },
     });
     created ? console.log("Data being added to database...") : null;
