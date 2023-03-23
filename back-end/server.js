@@ -10,7 +10,6 @@ app.get("/", (req, res) => {
 });
 
 let airportRoutes = require("./routes/airportRoutes");
-
 app.use("/api/airports", airportRoutes);
 
 // set port, listen for requests
