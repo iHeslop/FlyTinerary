@@ -2,8 +2,17 @@
 const Models = require("../models");
 const axios = require("axios");
 
-const getTeams = (res) => {
-  Models.Team.findAll({})
+const options = {
+  method: "GET",
+  url: "https://flight-radar1.p.rapidapi.com/airports/list",
+  headers: {
+    "X-RapidAPI-Key": "d5d47b738amsh0218173db374270p186c18jsnae1665f158e0",
+    "X-RapidAPI-Host": "flight-radar1.p.rapidapi.com",
+  },
+};
+
+const getAirports = (res) => {
+  Models.Airport.findAll({})
     .then(function (data) {
       res.send({ result: 200, data: data });
     })
@@ -12,8 +21,8 @@ const getTeams = (res) => {
     });
 };
 
-const createTeams = (data, res) => {
-  Models.Team.create(data)
+const createAirports = (data, res) => {
+  Models.Airport.create(data)
     .then(function (data) {
       res.send({ result: 200, data: data });
     })
@@ -22,9 +31,9 @@ const createTeams = (data, res) => {
     });
 };
 
-const updateTeams = (req, res) => {
-  let teamId = req.params.id;
-  Models.Team.update(req.body, { where: { id: teamId } })
+const updateAirports = (req, res) => {
+  let airportId = req.params.id;
+  Models.Airport.update(req.body, { where: { id: airportId } })
     .then(function (data) {
       res.send({ result: 200, data: data });
     })
@@ -33,10 +42,9 @@ const updateTeams = (req, res) => {
     });
 };
 
-const deleteTeams = (req, res) => {
-  let teamId = req.params.id;
-
-  Models.Team.destroy({ where: { id: teamId } })
+const deleteAirports = (req, res) => {
+  let airportId = req.params.id;
+  Models.Airport.destroy({ where: { id: airportId } })
     .then(function (data) {
       res.send({ result: 200, data: data });
     })
@@ -45,41 +53,46 @@ const deleteTeams = (req, res) => {
     });
 };
 
-const storeTeams = async (req, res) => {
-  let data = await axios.get("https://api.squiggle.com.au/?q=teams");
-  // .then((data) => {
-  let apiData = data.data.teams;
-  let teamData = apiData.map((team) => {
+const storeAirports = async (req, res) => {
+  let data = await axios.request(options);
+  let apiData = data.data;
+  console.log(apiData);
+  let airportData = apiData.map((airport) => {
     return {
-      id: team.id,
-      name: team.name,
-      debut: team.debut,
-      abbrev: team.abbrev,
-      logo: team.logo,
+      id: airport.id,
+      name: airport.name,
+      iata: airport.iata,
+      city: airport.city,
+      lat: airport.lat,
+      lon: airport.lon,
+      country: airport.country,
+      countryId: airport.countryId,
     };
   });
-  console.log(teamData);
+  console.log(airportData);
 
-  teamData.forEach(async (team) => {
-    let created = await Models.Team.findOrCreate({
-      where: { name: team.name },
+  airportData.forEach(async (airport) => {
+    let created = await Models.Airport.findOrCreate({
+      where: { name: airport.name },
       defaults: {
-        id: team.id,
-        name: team.name,
-        debut: team.debut,
-        abbrev: team.abbrev,
-        logo: team.logo,
+        id: airport.id,
+        name: airport.name,
+        iata: airport.iata,
+        city: airport.city,
+        lat: airport.lat,
+        lon: airport.lon,
+        country: airport.country,
+        countryId: airport.countryId,
       },
     });
-    // .then((created) => {
     created ? console.log("Data being added to database...") : null;
   });
 };
 
 module.exports = {
-  getTeams,
-  createTeams,
-  updateTeams,
-  deleteTeams,
-  storeTeams,
+  getAirports,
+  createAirports,
+  updateAirports,
+  deleteAirports,
+  storeAirports,
 };

@@ -20,5 +20,5 @@ const Controllers = require("./controllers");
 
 app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}.`);
-  await Controllers.airportsController.storeAirports();
+  await Controllers.airportController.storeAirports();
 });
