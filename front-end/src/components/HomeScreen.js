@@ -34,8 +34,8 @@ function HomeScreen(props) {
       arcStartLng={routeData[0]?.depPort?.lon}
       arcEndLat={routeData[0]?.arrPort?.lat}
       arcEndLng={routeData[0]?.arrPort?.lon}
-      arcDashLength={0.5}
-      arcDashGap={1}
+      arcDashLength={1}
+      arcDashGap={0}
       arcDashInitialGap={() => Math.random()}
       arcDashAnimateTime={3000}
       arcColor={(d) => [`rgba(0, 255, 0, 100)`, `rgba(255, 0, 0, 100)`]}
