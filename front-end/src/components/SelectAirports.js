@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AsyncSelect from "react-select/async";
+import Button from "@mui/material/Button";
 
 function SelectAirports(props) {
-  const [departureAirport, setDepartureAirport] = useState(null);
-  const [arrivalAirport, setArrivalAirport] = useState(null);
-
+  const [departureAirport, setDepartureAirport] = useState("");
+  const [arrivalAirport, setArrivalAirport] = useState("");
   const [airports, setAirports] = useState([]);
 
   useEffect(() => {
@@ -27,14 +27,22 @@ function SelectAirports(props) {
 
   const loadAirports = (inputValue, callback, selectedOption) => {
     const filteredAirports = filterAirports(inputValue, selectedOption);
-    const options = filteredAirports
-      .slice(0, 5)
-      .map((airport) => ({ label: airport.name, value: airport.id }));
+    const options = filteredAirports.slice(0, 5).map((airport) => ({
+      label: airport.name,
+      value: airport.id,
+      lat: airport.lat,
+      lon: airport.lon,
+      iata: airport.iata,
+    }));
 
     if (inputValue === "") {
-      let defaultOptions = airports
-        .slice(0, 5)
-        .map((airport) => ({ label: airport.name, value: airport.id }));
+      let defaultOptions = airports.slice(0, 5).map((airport) => ({
+        label: airport.name,
+        value: airport.id,
+        lat: airport.lat,
+        lon: airport.lon,
+        iata: airport.iata,
+      }));
       callback(defaultOptions);
     } else {
       setTimeout(() => {
@@ -56,6 +64,21 @@ function SelectAirports(props) {
     }
   };
 
+  const handleClearSelections = () => {
+    setDepartureAirport("");
+    setArrivalAirport("");
+    props.setIsSelectionMade(false);
+    props.setisRouteShown(false);
+  };
+
+  const handleShowRouteClick = () => {
+    if (departureAirport && arrivalAirport) {
+      props.setSelectedAirports(departureAirport, arrivalAirport);
+      props.setisRouteShown(true);
+      props.setIsSelectionMade(true);
+    }
+  };
+
   return (
     <div>
       <h4>From</h4>
@@ -63,7 +86,7 @@ function SelectAirports(props) {
         cacheOptions
         placeholder={"Sydney..."}
         loadOptions={loadAirports}
-        defaultOptions
+        defaultOptions={true}
         value={departureAirport}
         onChange={handleDepartureAirportChange}
       />
@@ -74,10 +97,16 @@ function SelectAirports(props) {
         loadOptions={(inputValue, callback) =>
           loadAirports(inputValue, callback, departureAirport)
         }
-        defaultOptions
+        defaultOptions={true}
         value={arrivalAirport}
         onChange={handleArrivalAirportChange}
       />
+      <Button variant="contained" onClick={handleShowRouteClick}>
+        Show Route
+      </Button>
+      <Button variant="contained" onClick={handleClearSelections}>
+        Clear Route
+      </Button>
     </div>
   );
 }
