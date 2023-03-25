@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import Globe from "react-globe.gl";
-import { useEffect, useState, useRef } from "react";
+import SelectAirports from "../components/SelectAirports";
+import NavBar from "../components/NavBar";
 
 function HomeScreen(props) {
-  const departureAirport = props.departureAirport;
-  const arrivalAirport = props.arrivalAirport;
+  const [departureAirport, setDepartureAirport] = useState("");
+  const [arrivalAirport, setArrivalAirport] = useState("");
+  const [isRouteShown, setisRouteShown] = useState(false);
+  const [isSelectionMade, setIsSelectionMade] = useState(false);
+
+  const clearData = () => {
+    setDepartureAirport("");
+    setArrivalAirport("");
+  };
+
+  const handleDepartureAirportChange = (selectedOption) => {
+    if (selectedOption && selectedOption.value !== arrivalAirport?.value) {
+      setDepartureAirport(selectedOption);
+    }
+  };
+
+  const handleArrivalAirportChange = (selectedOption) => {
+    if (selectedOption && selectedOption.value !== departureAirport?.value) {
+      setArrivalAirport(selectedOption);
+    }
+  };
 
   const routeData = [
     {
@@ -21,27 +41,41 @@ function HomeScreen(props) {
     },
   ];
 
-  console.log(routeData[0].arrPort.lat);
-
   return (
-    <Globe
-      key={props.isRouteShown ? "showRoute" : "hideRoute"}
-      globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
-      backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
-      arcsData={routeData}
-      arcLabel={`${routeData[0]?.depPort?.iata} &#8594; ${routeData[0]?.arrPort?.iata}`}
-      arcStartLat={routeData[0]?.depPort?.lat}
-      arcStartLng={routeData[0]?.depPort?.lon}
-      arcEndLat={routeData[0]?.arrPort?.lat}
-      arcEndLng={routeData[0]?.arrPort?.lon}
-      arcDashLength={1}
-      arcDashGap={0}
-      arcDashInitialGap={() => Math.random()}
-      arcDashAnimateTime={3000}
-      arcColor={(d) => [`rgba(0, 255, 0, 100)`, `rgba(255, 0, 0, 100)`]}
-      arcStroke={1}
-      arcsTransitionDuration={0}
-    />
+    <div>
+      <NavBar />
+      <SelectAirports
+        departureAirport={departureAirport}
+        arrivalAirport={arrivalAirport}
+        onDepartureAirportChange={handleDepartureAirportChange}
+        onArrivalAirportChange={handleArrivalAirportChange}
+        setSelectedAirports={(departure, arrival) => {
+          setDepartureAirport(departure);
+          setArrivalAirport(arrival);
+        }}
+        setisRouteShown={setisRouteShown}
+        isSelectionMade={isSelectionMade}
+        setIsSelectionMade={setIsSelectionMade}
+        clearData={clearData}
+      />
+      <Globe
+        key={props.isRouteShown ? "showRoute" : "hideRoute"}
+        globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
+        backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
+        arcsData={routeData}
+        arcStartLat={routeData[0]?.depPort?.lat}
+        arcStartLng={routeData[0]?.depPort?.lon}
+        arcEndLat={routeData[0]?.arrPort?.lat}
+        arcEndLng={routeData[0]?.arrPort?.lon}
+        arcDashLength={0.5}
+        arcDashGap={1}
+        arcDashInitialGap={() => Math.random()}
+        arcDashAnimateTime={3000}
+        arcColor={(d) => [`rgba(0, 255, 0, 100)`, `rgba(255, 0, 0, 100)`]}
+        arcStroke={1}
+        arcsTransitionDuration={0}
+      />
+    </div>
   );
 }
 

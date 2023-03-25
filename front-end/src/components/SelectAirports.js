@@ -2,11 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AsyncSelect from "react-select/async";
 import Button from "@mui/material/Button";
+import { SelectFlights } from "./SelectFlights";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 function SelectAirports(props) {
   const [departureAirport, setDepartureAirport] = useState("");
   const [arrivalAirport, setArrivalAirport] = useState("");
   const [airports, setAirports] = useState([]);
+  const [showFlights, setShowFlights] = useState(false);
+  const [selectedDate, setselectedDate] = useState(dayjs());
 
   useEffect(() => {
     axios.get("http://localhost:4000/api/airports/").then((response) => {
@@ -67,16 +73,20 @@ function SelectAirports(props) {
   const handleClearSelections = () => {
     setDepartureAirport("");
     setArrivalAirport("");
+    setShowFlights(false);
     props.setIsSelectionMade(false);
     props.setisRouteShown(false);
+    props.clearData();
   };
 
-  const handleShowRouteClick = () => {
-    if (departureAirport && arrivalAirport) {
-      props.setSelectedAirports(departureAirport, arrivalAirport);
-      props.setisRouteShown(true);
-      props.setIsSelectionMade(true);
-    }
+  //Flights Code
+
+  const searchFlights = () => {
+    setShowFlights(true);
+  };
+
+  const handleDateChange = (date) => {
+    setselectedDate(date);
   };
 
   return (
@@ -101,12 +111,28 @@ function SelectAirports(props) {
         value={arrivalAirport}
         onChange={handleArrivalAirportChange}
       />
-      <Button variant="contained" onClick={handleShowRouteClick}>
-        Show Route
+
+      <DatePicker
+        label="Select Date"
+        format="DD/MM/YYYY"
+        dateAdapter={AdapterDayjs}
+        value={selectedDate}
+        onChange={handleDateChange}
+      />
+
+      <Button variant="contained" onClick={searchFlights}>
+        Show Flights
       </Button>
       <Button variant="contained" onClick={handleClearSelections}>
         Clear Route
       </Button>
+      {showFlights && (
+        <SelectFlights
+          departureAirport={departureAirport}
+          arrivalAirport={arrivalAirport}
+          selectedDate={selectedDate}
+        />
+      )}
     </div>
   );
 }
