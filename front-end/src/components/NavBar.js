@@ -16,7 +16,7 @@ function NavBar(props) {
     }
   }, []);
   return (
-    <AppBar position="static">
+    <AppBar position="static" width="100%" sx={{ backgroundColor: "grey" }}>
       <Toolbar>
         <IconButton
           href={"/home"}
@@ -39,7 +39,7 @@ function NavBar(props) {
             MyItinerary
           </Button>
         </Stack>
-        <Typography>Welcome back {props.fName}!</Typography>
+        <Typography>Welcome {props.fName}!</Typography>
       </Toolbar>
     </AppBar>
   );

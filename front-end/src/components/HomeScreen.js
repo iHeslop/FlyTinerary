@@ -42,7 +42,7 @@ function HomeScreen(props) {
   ];
 
   return (
-    <div>
+    <div style={{ overflow: "hidden" }}>
       <NavBar
         fName={props.fName}
         onFNameChange={props.onFNameChange}
@@ -66,6 +66,7 @@ function HomeScreen(props) {
         key={props.isRouteShown ? "showRoute" : "hideRoute"}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
         backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
+        width={"100%"}
         arcsData={routeData}
         arcStartLat={routeData[0]?.depPort?.lat}
         arcStartLng={routeData[0]?.depPort?.lon}

@@ -65,7 +65,7 @@ function LoginForm(props) {
         component="main"
         maxWidth="xs"
         sx={{
-          mt: 10,
+          mt: 15,
         }}
       >
         <CssBaseline />
@@ -88,6 +88,7 @@ function LoginForm(props) {
             <Typography>FlyTinerary</Typography>
             <Grid container spacing={1} sx={{}}>
               <Button
+                color="grey"
                 variant="contained"
                 sx={{ mt: 3, mb: 2, width: "50%" }}
                 onClick={() => {
@@ -145,16 +146,9 @@ function LoginForm(props) {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Log In
               </Button>
               <Typography>{errorMessage}</Typography>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-              </Grid>
             </Box>
           </Box>
           <Box
@@ -184,6 +178,7 @@ function LoginForm(props) {
                 Log In
               </Button>
               <Button
+                color="grey"
                 variant="contained"
                 sx={{ mt: 3, mb: 2, width: "50%" }}
                 onClick={() => {

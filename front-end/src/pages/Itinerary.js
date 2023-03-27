@@ -13,7 +13,7 @@ function Itinerary(props) {
   return (
     <div>
       <Typography>My Itinerary</Typography>
-      <Typography>Welcome Back {props.fName}!</Typography>
+      <Typography>Welcome {props.fName}!</Typography>
     </div>
   );
 }

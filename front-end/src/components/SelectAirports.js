@@ -6,6 +6,7 @@ import { SelectFlights } from "./SelectFlights";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { Radio, RadioGroup, FormControlLabel } from "@mui/material";
 
 function SelectAirports(props) {
   const [departureAirport, setDepartureAirport] = useState("");
@@ -13,6 +14,7 @@ function SelectAirports(props) {
   const [airports, setAirports] = useState([]);
   const [showFlights, setShowFlights] = useState(false);
   const [selectedDate, setselectedDate] = useState(dayjs());
+  const [flightType, setFlightType] = useState("roundTrip");
 
   useEffect(() => {
     axios.get("http://localhost:4000/api/airports/").then((response) => {
@@ -77,6 +79,8 @@ function SelectAirports(props) {
     props.setIsSelectionMade(false);
     props.setisRouteShown(false);
     props.clearData();
+    setFlightType("roundTrip");
+    setselectedDate(dayjs());
   };
 
   //Flights Code
@@ -87,6 +91,10 @@ function SelectAirports(props) {
 
   const handleDateChange = (date) => {
     setselectedDate(date);
+  };
+
+  const handleFlightTypeChange = (e) => {
+    setFlightType(e.target.value);
   };
 
   return (
@@ -111,7 +119,22 @@ function SelectAirports(props) {
         value={arrivalAirport}
         onChange={handleArrivalAirportChange}
       />
-
+      <RadioGroup>
+        <FormControlLabel
+          label="Round Trip"
+          value="roundTrip"
+          checked={flightType === "roundTrip"}
+          control={<Radio />}
+          onChange={handleFlightTypeChange}
+        />
+        <FormControlLabel
+          label="One Way"
+          value="departures"
+          checked={flightType === "departures"}
+          control={<Radio />}
+          onChange={handleFlightTypeChange}
+        />
+      </RadioGroup>
       <DatePicker
         label="Select Date"
         format="DD/MM/YYYY"
@@ -131,6 +154,7 @@ function SelectAirports(props) {
           departureAirport={departureAirport}
           arrivalAirport={arrivalAirport}
           selectedDate={selectedDate}
+          flightType={flightType}
         />
       )}
     </div>
