@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -8,7 +8,13 @@ import { IconButton, Stack } from "@mui/material";
 import { Button } from "@mui/material";
 import FlightTakeoff from "@mui/icons-material/FlightTakeoff";
 
-function NavBar() {
+function NavBar(props) {
+  useEffect(() => {
+    const fNameStorage = localStorage.getItem("fName");
+    if (fNameStorage) {
+      props.setFname(fNameStorage);
+    }
+  }, []);
   return (
     <AppBar position="static">
       <Toolbar>
@@ -33,6 +39,7 @@ function NavBar() {
             MyItinerary
           </Button>
         </Stack>
+        <Typography>Welcome back {props.fName}!</Typography>
       </Toolbar>
     </AppBar>
   );

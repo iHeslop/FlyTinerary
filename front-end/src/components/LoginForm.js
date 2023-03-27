@@ -15,23 +15,59 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ReactBoxFlip from "react-box-flip";
 import { useState } from "react";
 import FlightTakeoff from "@mui/icons-material/FlightTakeoff";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const theme = createTheme();
-function LoginForm() {
+function LoginForm(props) {
   const [cardFlip, setCardFlip] = useState(false);
+  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [lName, setLname] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+    const response = await axios.get("http://localhost:4000/api/users");
+    const users = response.data.data;
+    users.forEach((user) => {
+      const { email, password } = user;
     });
+    const user = users.find(
+      (user) => user.email === email && user.password === password
+    );
+    if (user) {
+      props.onFNameChange(user.fname);
+      navigate("/home");
+    } else {
+      setErrorMessage("Invalid email or password! Try Again!");
+    }
+  };
+
+  const handleSignUp = async (event) => {
+    event.preventDefault();
+    const response = await axios
+      .post("http://localhost:4000/api/users/create", {
+        fname: props.fName,
+        lname: lName,
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        console.log(response);
+      });
+    navigate("/home");
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs" sx={{ mt: 10 }}>
+    <div>
+      <Container
+        component="main"
+        maxWidth="xs"
+        sx={{
+          mt: 10,
+        }}
+      >
         <CssBaseline />
         <ReactBoxFlip isFlipped={cardFlip} flipDirection="horizontal">
           <Box
@@ -41,12 +77,16 @@ function LoginForm() {
               flexDirection: "column",
               alignItems: "center",
               boxShadow: 5,
+              backgroundColor: "rgba(255, 255, 255, 0.9)",
+              borderRadius: 10,
+              padding: 3,
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <FlightTakeoff />
             </Avatar>
-            <Grid container spacing={1} xs={12} sm={6}>
+            <Typography>FlyTinerary</Typography>
+            <Grid container spacing={1} sx={{}}>
               <Button
                 variant="contained"
                 sx={{ mt: 3, mb: 2, width: "50%" }}
@@ -76,10 +116,14 @@ function LoginForm() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
+                id="loginEmail"
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setErrorMessage("");
+                }}
               />
               <TextField
                 margin="normal"
@@ -88,8 +132,12 @@ function LoginForm() {
                 name="password"
                 label="Password"
                 type="password"
-                id="password"
+                id="loginPassword"
                 autoComplete="current-password"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setErrorMessage("");
+                }}
               />
               <Button
                 type="submit"
@@ -99,6 +147,7 @@ function LoginForm() {
               >
                 Sign In
               </Button>
+              <Typography>{errorMessage}</Typography>
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
@@ -115,12 +164,16 @@ function LoginForm() {
               flexDirection: "column",
               alignItems: "center",
               boxShadow: 5,
+              backgroundColor: "rgba(255, 255, 255, 0.9)",
+              borderRadius: 10,
+              padding: 3,
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <FlightTakeoff />
             </Avatar>
-            <Grid container spacing={1} xs={12} sm={6}>
+            <Typography>FlyTinerary</Typography>
+            <Grid container spacing={1}>
               <Button
                 variant="contained"
                 sx={{ mt: 3, mb: 2, width: "50%" }}
@@ -143,7 +196,7 @@ function LoginForm() {
             <Box
               component="form"
               noValidate
-              onSubmit={handleSubmit}
+              onSubmit={handleSignUp}
               sx={{ mt: 3 }}
             >
               <Grid container spacing={2}>
@@ -155,6 +208,7 @@ function LoginForm() {
                     fullWidth
                     id="firstName"
                     label="First Name"
+                    onChange={(e) => props.onFNameChange(e.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -165,16 +219,18 @@ function LoginForm() {
                     label="Last Name"
                     name="lastName"
                     autoComplete="family-name"
+                    onChange={(e) => setLname(e.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
                     required
                     fullWidth
-                    id="email"
+                    id="signupEmail"
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -184,8 +240,9 @@ function LoginForm() {
                     name="password"
                     label="Password"
                     type="password"
-                    id="password"
+                    id="signupPassword"
                     autoComplete="new-password"
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </Grid>
               </Grid>
@@ -201,7 +258,7 @@ function LoginForm() {
           </Box>
         </ReactBoxFlip>
       </Container>
-    </ThemeProvider>
+    </div>
   );
 }
 

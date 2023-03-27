@@ -4,7 +4,11 @@ import HomeScreen from "../components/HomeScreen";
 function Home(props) {
   return (
     <div>
-      <HomeScreen />
+      <HomeScreen
+        fName={props.fName}
+        onFNameChange={props.onFNameChange}
+        setFname={props.setFname}
+      />
     </div>
   );
 }

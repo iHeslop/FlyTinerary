@@ -1,12 +1,19 @@
 import NavBar from "../components/NavBar";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Typography } from "@mui/material";
 
-function Itinerary() {
+function Itinerary(props) {
+  useEffect(() => {
+    const fNameStorage = localStorage.getItem("fName");
+    if (fNameStorage) {
+      props.setFname(fNameStorage);
+    }
+  }, []);
+
   return (
     <div>
-      <NavBar />
       <Typography>My Itinerary</Typography>
+      <Typography>Welcome Back {props.fName}!</Typography>
     </div>
   );
 }

@@ -43,7 +43,11 @@ function HomeScreen(props) {
 
   return (
     <div>
-      <NavBar />
+      <NavBar
+        fName={props.fName}
+        onFNameChange={props.onFNameChange}
+        setFname={props.setFname}
+      />
       <SelectAirports
         departureAirport={departureAirport}
         arrivalAirport={arrivalAirport}

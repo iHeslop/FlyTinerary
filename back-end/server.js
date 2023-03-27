@@ -12,7 +12,10 @@ app.get("/", (req, res) => {
 });
 
 let airportRoutes = require("./routes/airportRoutes");
+let userRoutes = require("./routes/userRoutes.js");
+
 app.use("/api/airports", airportRoutes);
+app.use("/api/users", userRoutes);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 4000;
