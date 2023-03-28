@@ -6,11 +6,12 @@ class User extends Model {}
 
 User.init(
   {
-    id: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
+      primaryKey: true,
     },
     fname: { type: DataTypes.STRING, allowNull: false, required: true },
     lname: { type: DataTypes.STRING, allowNull: false, required: true },

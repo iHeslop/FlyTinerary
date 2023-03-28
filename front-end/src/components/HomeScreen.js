@@ -61,12 +61,13 @@ function HomeScreen(props) {
         isSelectionMade={isSelectionMade}
         setIsSelectionMade={setIsSelectionMade}
         clearData={clearData}
+        userId={props.userId}
+        setUserId={props.setUserId}
       />
       <Globe
         key={props.isRouteShown ? "showRoute" : "hideRoute"}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
         backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
-        width={"100%"}
         arcsData={routeData}
         arcStartLat={routeData[0]?.depPort?.lat}
         arcStartLng={routeData[0]?.depPort?.lon}

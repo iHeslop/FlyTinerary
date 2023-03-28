@@ -30,15 +30,16 @@ function SelectFlights(props) {
     axios
       .request(options)
       .then((response) => {
-        setFlights(
-          response.data.getAirFlightDepartures.results.result.itinerary_data
-        );
+        const apiFlightType = props.apiFlightType;
+        console.log(apiFlightType);
+        console.log(response.data[apiFlightType]);
+        console.log(response.data);
+        setFlights(response.data[apiFlightType].results.result.itinerary_data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
-
+  }, [props]);
   console.log(flights);
 
   return (
@@ -49,6 +50,8 @@ function SelectFlights(props) {
           .map((key) => (
             <Grid item xs={12} md={12} lg={12} key={key}>
               <FlightCard
+                userId={props.userId}
+                setUserId={props.setUserId}
                 price={flights[key].price_details.source_total_fare}
                 name={flights[key].slice_data.slice_0.airline.name}
                 currency={flights[key].price_details.source_symbol}

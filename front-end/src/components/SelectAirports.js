@@ -15,9 +15,10 @@ function SelectAirports(props) {
   const [showFlights, setShowFlights] = useState(false);
   const [selectedDate, setselectedDate] = useState(dayjs());
   const [flightType, setFlightType] = useState("roundTrip");
+  const [apiFlightType, setApiFlightType] = useState("getAirFlightRoundTrip");
 
   useEffect(() => {
-    axios.get("http://localhost:4000/api/airports/").then((response) => {
+    axios.get("http://localhost:4000/airports/").then((response) => {
       setAirports(response.data.data);
     });
   }, []);
@@ -80,6 +81,7 @@ function SelectAirports(props) {
     props.setisRouteShown(false);
     props.clearData();
     setFlightType("roundTrip");
+    setApiFlightType("getAirFlightRoundTrip");
     setselectedDate(dayjs());
   };
 
@@ -95,6 +97,11 @@ function SelectAirports(props) {
 
   const handleFlightTypeChange = (e) => {
     setFlightType(e.target.value);
+    if (e.target.value === "departures") {
+      setApiFlightType("getAirFlightDepartures");
+    } else {
+      setApiFlightType("getAirFlightRoundTrip");
+    }
   };
 
   return (
@@ -155,6 +162,9 @@ function SelectAirports(props) {
           arrivalAirport={arrivalAirport}
           selectedDate={selectedDate}
           flightType={flightType}
+          apiFlightType={apiFlightType}
+          userId={props.userId}
+          setUserId={props.setUserId}
         />
       )}
     </div>

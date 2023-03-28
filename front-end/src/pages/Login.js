@@ -33,7 +33,12 @@ function Login(props) {
       >
         <source src={Video} type="video/mp4" />
       </video>
-      <LoginForm fName={props.fName} onFNameChange={props.onFNameChange} />
+      <LoginForm
+        fName={props.fName}
+        onFNameChange={props.onFNameChange}
+        userId={props.userId}
+        onUserIdChange={props.onUserIdChange}
+      />
     </div>
   );
 }

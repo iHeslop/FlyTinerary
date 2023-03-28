@@ -8,6 +8,8 @@ function Home(props) {
         fName={props.fName}
         onFNameChange={props.onFNameChange}
         setFname={props.setFname}
+        userId={props.userId}
+        setUserId={props.setUserId}
       />
     </div>
   );

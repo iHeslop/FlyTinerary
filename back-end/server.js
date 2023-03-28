@@ -13,9 +13,11 @@ app.get("/", (req, res) => {
 
 let airportRoutes = require("./routes/airportRoutes");
 let userRoutes = require("./routes/userRoutes.js");
+let flightRoutes = require("./routes/flightRoutes");
 
-app.use("/api/airports", airportRoutes);
-app.use("/api/users", userRoutes);
+app.use("/airports", airportRoutes);
+app.use("/users", userRoutes);
+app.use("/flights", flightRoutes);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 4000;

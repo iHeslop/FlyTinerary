@@ -7,9 +7,16 @@ import { Route, Routes } from "react-router-dom";
 
 export const AppRoutes = () => {
   const [fName, setFname] = useState("");
+  const [userId, setUserId] = useState("");
+
   const handlefNameChange = (newFname) => {
     setFname(newFname);
     localStorage.setItem("fName", newFname);
+  };
+
+  const handleUserIdChange = (newUserId) => {
+    setUserId(newUserId);
+    localStorage.setItem("userId", newUserId);
   };
 
   return (
@@ -17,7 +24,14 @@ export const AppRoutes = () => {
       <Route
         exact
         path="/"
-        element={<Login fName={fName} onFNameChange={handlefNameChange} />}
+        element={
+          <Login
+            fName={fName}
+            userId={userId}
+            onFNameChange={handlefNameChange}
+            onUserIdChange={handleUserIdChange}
+          />
+        }
       />
 
       <Route
@@ -27,13 +41,22 @@ export const AppRoutes = () => {
             fName={fName}
             onFNameChange={handlefNameChange}
             setFname={setFname}
+            userId={userId}
+            setUserId={setUserId}
           />
         }
       />
 
       <Route
         path="/itinerary"
-        element={<Itinerary fName={fName} setFname={setFname} />}
+        element={
+          <Itinerary
+            fName={fName}
+            setFname={setFname}
+            userId={userId}
+            setUserId={setUserId}
+          />
+        }
       />
 
       <Route path="*" element={<PageNotFound />} />

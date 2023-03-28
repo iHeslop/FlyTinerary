@@ -1,8 +1,8 @@
 "use strict";
 const Models = require("../models");
 
-const getUsers = (res) => {
-  Models.User.findAll({})
+const getFlights = (res) => {
+  Models.Flight.findAll({})
     .then(function (data) {
       res.send({ result: 200, data: data });
     })
@@ -11,8 +11,8 @@ const getUsers = (res) => {
     });
 };
 
-const createUsers = (data, res) => {
-  Models.User.create(data)
+const createFlights = (data, res) => {
+  Models.Flight.create(data)
     .then(function (data) {
       res.send({ result: 200, data: data });
     })
@@ -21,9 +21,9 @@ const createUsers = (data, res) => {
     });
 };
 
-const updateUsers = (req, res) => {
-  let userId = req.params.id;
-  Models.User.update(req.body, { where: { id: userId } })
+const updateFlights = (req, res) => {
+  let flightId = req.params.id;
+  Models.Flight.update(req.body, { where: { id: flightId } })
     .then(function (data) {
       res.send({ result: 200, data: data });
     })
@@ -32,9 +32,9 @@ const updateUsers = (req, res) => {
     });
 };
 
-const deleteUsers = (req, res) => {
-  let userId = req.params.id;
-  Models.User.destroy({ where: { id: userId } })
+const deleteFlights = (req, res) => {
+  let flightId = req.params.id;
+  Models.Flight.destroy({ where: { id: flightId } })
     .then(function (data) {
       res.send({ result: 200, data: data });
     })
@@ -44,8 +44,8 @@ const deleteUsers = (req, res) => {
 };
 
 module.exports = {
-  getUsers,
-  createUsers,
-  updateUsers,
-  deleteUsers,
+  getFlights,
+  createFlights,
+  updateFlights,
+  deleteFlights,
 };

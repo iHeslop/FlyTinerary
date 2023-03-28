@@ -8,12 +8,23 @@ function Itinerary(props) {
     if (fNameStorage) {
       props.setFname(fNameStorage);
     }
+    const userIdStorage = localStorage.getItem("userId");
+    if (userIdStorage) {
+      props.setUserId(userIdStorage);
+    }
   }, []);
 
   return (
     <div>
+      <NavBar
+        fName={props.fName}
+        onFNameChange={props.onFNameChange}
+        setFname={props.setFname}
+      />
       <Typography>My Itinerary</Typography>
-      <Typography>Welcome {props.fName}!</Typography>
+      <Typography>
+        Welcome {props.fName}! Your user id is: {props.userId}
+      </Typography>
     </div>
   );
 }

@@ -28,7 +28,7 @@ function LoginForm(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await axios.get("http://localhost:4000/api/users");
+    const response = await axios.get("http://localhost:4000/users");
     const users = response.data.data;
     users.forEach((user) => {
       const { email, password } = user;
@@ -38,6 +38,7 @@ function LoginForm(props) {
     );
     if (user) {
       props.onFNameChange(user.fname);
+      props.onUserIdChange(user.userId);
       navigate("/home");
     } else {
       setErrorMessage("Invalid email or password! Try Again!");
@@ -47,14 +48,16 @@ function LoginForm(props) {
   const handleSignUp = async (event) => {
     event.preventDefault();
     const response = await axios
-      .post("http://localhost:4000/api/users/create", {
+      .post("http://localhost:4000/users/create", {
         fname: props.fName,
         lname: lName,
         email: email,
         password: password,
       })
       .then((response) => {
-        console.log(response);
+        const newUserId = response.data.data.userId;
+        console.log(newUserId);
+        props.onUserIdChange(newUserId);
       });
     navigate("/home");
   };
@@ -88,7 +91,6 @@ function LoginForm(props) {
             <Typography>FlyTinerary</Typography>
             <Grid container spacing={1} sx={{}}>
               <Button
-                color="grey"
                 variant="contained"
                 sx={{ mt: 3, mb: 2, width: "50%" }}
                 onClick={() => {
@@ -98,6 +100,7 @@ function LoginForm(props) {
                 Log In
               </Button>
               <Button
+                color="grey"
                 variant="contained"
                 sx={{ mt: 3, mb: 2, width: "50%" }}
                 onClick={() => {
@@ -169,6 +172,7 @@ function LoginForm(props) {
             <Typography>FlyTinerary</Typography>
             <Grid container spacing={1}>
               <Button
+                color="grey"
                 variant="contained"
                 sx={{ mt: 3, mb: 2, width: "50%" }}
                 onClick={() => {
@@ -178,7 +182,6 @@ function LoginForm(props) {
                 Log In
               </Button>
               <Button
-                color="grey"
                 variant="contained"
                 sx={{ mt: 3, mb: 2, width: "50%" }}
                 onClick={() => {
