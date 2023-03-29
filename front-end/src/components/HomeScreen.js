@@ -40,7 +40,6 @@ function HomeScreen(props) {
       },
     },
   ];
-
   return (
     <div style={{ overflow: "hidden" }}>
       <NavBar
@@ -68,17 +67,20 @@ function HomeScreen(props) {
         key={props.isRouteShown ? "showRoute" : "hideRoute"}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
         backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
+        // Arcs Code
         arcsData={routeData}
+        arcLabel={() =>
+          `${routeData[0]?.depPort?.iata} &#8594; ${routeData[0]?.arrPort?.iata}`
+        }
         arcStartLat={routeData[0]?.depPort?.lat}
         arcStartLng={routeData[0]?.depPort?.lon}
         arcEndLat={routeData[0]?.arrPort?.lat}
         arcEndLng={routeData[0]?.arrPort?.lon}
-        arcDashLength={0.5}
+        arcDashLength={0.8}
         arcDashGap={1}
         arcDashInitialGap={() => Math.random()}
         arcDashAnimateTime={3000}
-        arcColor={(d) => [`rgba(0, 255, 0, 100)`, `rgba(255, 0, 0, 100)`]}
-        arcStroke={1}
+        arcColor={(d) => [`rgba(0, 255, 0, 0.5)`, `rgba(255, 0, 0, 0.5)`]}
         arcsTransitionDuration={0}
       />
     </div>

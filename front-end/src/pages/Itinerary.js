@@ -1,6 +1,7 @@
 import NavBar from "../components/NavBar";
 import React, { useEffect } from "react";
 import { Typography } from "@mui/material";
+// import ItineraryDisplay from "../components/ItineraryDisplay";
 
 function Itinerary(props) {
   useEffect(() => {

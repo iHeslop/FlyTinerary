@@ -22,9 +22,24 @@ app.use("/flights", flightRoutes);
 // set port, listen for requests
 const PORT = process.env.PORT || 4000;
 
-const Controllers = require("./controllers");
+const airportController = require("./controllers/airportController");
+const airportModel = require("./models/Airport");
+
+async function storeAirports() {
+  try {
+    const airports = await airportModel.findAll();
+    if (airports.length === 0) {
+      await airportController.storeAirports();
+      console.log("Airports added to database.");
+    } else {
+      console.log("Airports already exist in database.");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}.`);
-  // await Controllers.airportController.storeAirports();
+  await storeAirports();
 });
