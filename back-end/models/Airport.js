@@ -15,8 +15,8 @@ Airport.init(
     name: { type: DataTypes.STRING, allowNull: false, required: true },
     iata: { type: DataTypes.STRING, allowNull: false, required: true },
     city: { type: DataTypes.STRING },
-    lat: { type: DataTypes.INTEGER, allowNull: false },
-    lon: { type: DataTypes.INTEGER, allowNull: false },
+    lat: { type: DataTypes.FLOAT, allowNull: false },
+    lon: { type: DataTypes.FLOAT, allowNull: false },
   },
   {
     sequelize: sequelizeInstance,

@@ -11,6 +11,18 @@ const getFlights = (res) => {
     });
 };
 
+const getUserFlights = (req, res) => {
+  Models.Flight.findAll({
+    where: { userId: req.params.id },
+  })
+    .then(function (data) {
+      res.send({ result: 200, data: data });
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
 const createFlights = (data, res) => {
   Models.Flight.create(data)
     .then(function (data) {
@@ -33,8 +45,8 @@ const updateFlights = (req, res) => {
 };
 
 const deleteFlights = (req, res) => {
-  let flightId = req.params.id;
-  Models.Flight.destroy({ where: { id: flightId } })
+  let flightId = req.params.flightId;
+  Models.Flight.destroy({ where: { flightId: flightId } })
     .then(function (data) {
       res.send({ result: 200, data: data });
     })
@@ -48,4 +60,5 @@ module.exports = {
   createFlights,
   updateFlights,
   deleteFlights,
+  getUserFlights,
 };

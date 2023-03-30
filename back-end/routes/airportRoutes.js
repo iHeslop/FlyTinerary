@@ -7,6 +7,10 @@ router.get("/", (req, res) => {
   Controllers.airportController.getAirports(res);
 });
 
+router.get("/:iata", (req, res) => {
+  Controllers.airportController.getIataAirports(req, res);
+});
+
 router.post("/create", (req, res) => {
   Controllers.airportController.createAirports(req.body, res);
 });

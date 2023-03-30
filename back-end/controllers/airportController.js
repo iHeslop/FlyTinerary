@@ -21,6 +21,18 @@ const getAirports = (res) => {
     });
 };
 
+const getIataAirports = (req, res) => {
+  Models.Airport.findAll({
+    where: { iata: req.params.iata },
+  })
+    .then(function (data) {
+      res.send({ result: 200, data: data });
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
 const createAirports = (data, res) => {
   Models.Airport.create(data)
     .then(function (data) {
@@ -90,4 +102,5 @@ module.exports = {
   updateAirports,
   deleteAirports,
   storeAirports,
+  getIataAirports,
 };

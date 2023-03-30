@@ -1,7 +1,7 @@
 import NavBar from "../components/NavBar";
 import React, { useEffect } from "react";
 import { Typography } from "@mui/material";
-// import ItineraryDisplay from "../components/ItineraryDisplay";
+import ItineraryDisplay from "../components/ItineraryDisplay";
 
 function Itinerary(props) {
   useEffect(() => {
@@ -26,6 +26,7 @@ function Itinerary(props) {
       <Typography>
         Welcome {props.fName}! Your user id is: {props.userId}
       </Typography>
+      <ItineraryDisplay />
     </div>
   );
 }

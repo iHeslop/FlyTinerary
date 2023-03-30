@@ -79,9 +79,10 @@ function HomeScreen(props) {
         arcDashLength={0.8}
         arcDashGap={1}
         arcDashInitialGap={() => Math.random()}
-        arcDashAnimateTime={3000}
+        arcDashAnimateTime={4000}
         arcColor={(d) => [`rgba(0, 255, 0, 0.5)`, `rgba(255, 0, 0, 0.5)`]}
-        arcsTransitionDuration={0}
+        arcsTransitionDuration={2}
+        arcStroke={0.8}
       />
     </div>
   );
