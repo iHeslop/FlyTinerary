@@ -24,9 +24,17 @@ function SelectAirports(props) {
   }, []);
 
   const filterAirports = (inputValue, selectedOption) => {
-    const filteredAirports = airports.filter((i) =>
-      i.name.toLowerCase().includes(inputValue.toLowerCase())
-    );
+    const filteredAirports = airports
+      .filter(
+        (i) =>
+          i.name.toLowerCase().includes(inputValue.toLowerCase()) ||
+          i.city?.toLowerCase().includes(inputValue.toLowerCase())
+      )
+      .sort((a, b) => {
+        const aIndex = a.name.toLowerCase().indexOf(inputValue.toLowerCase());
+        const bIndex = b.name.toLowerCase().indexOf(inputValue.toLowerCase());
+        return aIndex - bIndex;
+      });
     if (selectedOption) {
       return filteredAirports.filter((i) => i.id !== selectedOption.value);
     } else {
@@ -36,7 +44,7 @@ function SelectAirports(props) {
 
   const loadAirports = (inputValue, callback, selectedOption) => {
     const filteredAirports = filterAirports(inputValue, selectedOption);
-    const options = filteredAirports.slice(0, 5).map((airport) => ({
+    const options = filteredAirports.map((airport) => ({
       label: airport.name,
       value: airport.id,
       lat: airport.lat,
@@ -45,7 +53,7 @@ function SelectAirports(props) {
     }));
 
     if (inputValue === "") {
-      let defaultOptions = airports.slice(0, 5).map((airport) => ({
+      let defaultOptions = airports.map((airport) => ({
         label: airport.name,
         value: airport.id,
         lat: airport.lat,

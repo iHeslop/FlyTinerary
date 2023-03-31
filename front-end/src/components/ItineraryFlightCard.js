@@ -20,8 +20,8 @@ function ItineraryFlightCard(props) {
       .then((response) => {
         console.log(response);
       });
-    props.setRerender((prev) => !prev);
     alert("Flight removed from your Itinerary!");
+    props.setRerender((prev) => !prev);
   };
 
   return (
