@@ -6,7 +6,8 @@ import { SelectFlights } from "./SelectFlights";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { Radio, RadioGroup, FormControlLabel } from "@mui/material";
+import { Radio, FormControlLabel, Typography, Stack, Box } from "@mui/material";
+import "../fonts/Poppins-Medium.ttf";
 
 function SelectAirports(props) {
   const [departureAirport, setDepartureAirport] = useState("");
@@ -114,27 +115,62 @@ function SelectAirports(props) {
 
   return (
     <div>
-      <h4>From</h4>
-      <AsyncSelect
-        cacheOptions
-        placeholder={"Sydney..."}
-        loadOptions={loadAirports}
-        defaultOptions={true}
-        value={departureAirport}
-        onChange={handleDepartureAirportChange}
-      />
-      <h4>To</h4>
-      <AsyncSelect
-        cacheOptions
-        placeholder={"London..."}
-        loadOptions={(inputValue, callback) =>
-          loadAirports(inputValue, callback, departureAirport)
-        }
-        defaultOptions={true}
-        value={arrivalAirport}
-        onChange={handleArrivalAirportChange}
-      />
-      <RadioGroup>
+      <Stack
+        direction="row"
+        spacing={2}
+        alignItems="center"
+        sx={{ paddingTop: "5%", width: "100%" }}
+      >
+        <Typography sx={{ fontFamily: "Poppins", fontSize: "20px" }}>
+          From:
+        </Typography>
+        <AsyncSelect
+          cacheOptions
+          placeholder={"Sydney..."}
+          loadOptions={loadAirports}
+          defaultOptions={true}
+          value={departureAirport}
+          onChange={handleDepartureAirportChange}
+        />
+      </Stack>
+      <Stack
+        direction="row"
+        spacing={2}
+        alignItems="center"
+        sx={{ paddingTop: "5%", width: "100%" }}
+      >
+        <Typography sx={{ fontFamily: "Poppins", fontSize: "20px" }}>
+          To:
+        </Typography>
+        <AsyncSelect
+          cacheOptions
+          placeholder={"London..."}
+          loadOptions={(inputValue, callback) =>
+            loadAirports(inputValue, callback, departureAirport)
+          }
+          defaultOptions={true}
+          value={arrivalAirport}
+          onChange={handleArrivalAirportChange}
+        />
+      </Stack>
+      <Stack sx={{ paddingTop: "10%", width: "100%" }}>
+        <DatePicker
+          label="Select Date"
+          format="DD/MM/YYYY"
+          dateAdapter={AdapterDayjs}
+          value={selectedDate}
+          onChange={handleDateChange}
+        />
+      </Stack>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          width: "100%",
+          paddingTop: "5%",
+          justifyContent: "center",
+        }}
+      >
         <FormControlLabel
           label="Round Trip"
           value="roundTrip"
@@ -149,15 +185,7 @@ function SelectAirports(props) {
           control={<Radio />}
           onChange={handleFlightTypeChange}
         />
-      </RadioGroup>
-      <DatePicker
-        label="Select Date"
-        format="DD/MM/YYYY"
-        dateAdapter={AdapterDayjs}
-        value={selectedDate}
-        onChange={handleDateChange}
-      />
-
+      </Box>
       <Button variant="contained" onClick={searchFlights}>
         Show Flights
       </Button>

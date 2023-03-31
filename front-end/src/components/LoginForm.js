@@ -3,20 +3,16 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ReactBoxFlip from "react-box-flip";
 import { useState } from "react";
 import FlightTakeoff from "@mui/icons-material/FlightTakeoff";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "../fonts/Poppins-Medium.ttf";
 
 function LoginForm(props) {
   const [cardFlip, setCardFlip] = useState(false);
@@ -81,18 +77,27 @@ function LoginForm(props) {
               alignItems: "center",
               boxShadow: 5,
               backgroundColor: "rgba(255, 255, 255, 0.9)",
-              borderRadius: 10,
+              borderRadius: 13,
               padding: 3,
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <Avatar sx={{ m: 1, bgcolor: "grey" }}>
               <FlightTakeoff />
             </Avatar>
-            <Typography>FlyTinerary</Typography>
+            <Typography sx={{ fontFamily: "Poppins", fontSize: "35px" }}>
+              FlyTinerary
+            </Typography>
             <Grid container spacing={1} sx={{}}>
               <Button
+                color="primary"
                 variant="contained"
-                sx={{ mt: 3, mb: 2, width: "50%" }}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  width: "50%",
+                  fontFamily: "Poppins",
+                  fontSize: "18px",
+                }}
                 onClick={() => {
                   setCardFlip(false);
                 }}
@@ -102,7 +107,13 @@ function LoginForm(props) {
               <Button
                 color="grey"
                 variant="contained"
-                sx={{ mt: 3, mb: 2, width: "50%" }}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  width: "50%",
+                  fontFamily: "Poppins",
+                  fontSize: "18px",
+                }}
                 onClick={() => {
                   setCardFlip(true);
                 }}
@@ -147,7 +158,7 @@ function LoginForm(props) {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2, fontFamily: "Poppins", fontSize: "15px" }}
               >
                 Log In
               </Button>
@@ -162,19 +173,27 @@ function LoginForm(props) {
               alignItems: "center",
               boxShadow: 5,
               backgroundColor: "rgba(255, 255, 255, 0.9)",
-              borderRadius: 10,
+              borderRadius: 13,
               padding: 3,
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <Avatar sx={{ m: 1, bgcolor: "grey" }}>
               <FlightTakeoff />
             </Avatar>
-            <Typography>FlyTinerary</Typography>
+            <Typography sx={{ fontFamily: "Poppins", fontSize: "35px" }}>
+              FlyTinerary
+            </Typography>
             <Grid container spacing={1}>
               <Button
                 color="grey"
                 variant="contained"
-                sx={{ mt: 3, mb: 2, width: "50%" }}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  width: "50%",
+                  fontFamily: "Poppins",
+                  fontSize: "18px",
+                }}
                 onClick={() => {
                   setCardFlip(false);
                 }}
@@ -183,7 +202,13 @@ function LoginForm(props) {
               </Button>
               <Button
                 variant="contained"
-                sx={{ mt: 3, mb: 2, width: "50%" }}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  width: "50%",
+                  fontFamily: "Poppins",
+                  fontSize: "18px",
+                }}
                 onClick={() => {
                   setCardFlip(true);
                 }}
@@ -248,7 +273,7 @@ function LoginForm(props) {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2, fontFamily: "Poppins", fontSize: "15px" }}
               >
                 Sign Up
               </Button>

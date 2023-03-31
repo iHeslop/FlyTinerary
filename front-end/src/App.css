@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: "Poppins";
+  /*Can be any text*/
+  src: local("Poppins-Medium"),
+    url("./fonts/Poppins-Medium.ttf") format("truetype");
+}
