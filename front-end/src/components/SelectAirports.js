@@ -6,7 +6,7 @@ import { SelectFlights } from "./SelectFlights";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { Radio, FormControlLabel, Typography, Stack, Box } from "@mui/material";
+import { Radio, FormControlLabel, Typography, Box, Card } from "@mui/material";
 import "../fonts/Poppins-Medium.ttf";
 
 function SelectAirports(props) {
@@ -17,6 +17,7 @@ function SelectAirports(props) {
   const [selectedDate, setselectedDate] = useState(dayjs());
   const [flightType, setFlightType] = useState("roundTrip");
   const [apiFlightType, setApiFlightType] = useState("getAirFlightRoundTrip");
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     axios.get("http://localhost:4000/airports/").then((response) => {
@@ -92,12 +93,14 @@ function SelectAirports(props) {
     setFlightType("roundTrip");
     setApiFlightType("getAirFlightRoundTrip");
     setselectedDate(dayjs());
+    setCurrentIndex(0);
   };
 
   //Flights Code
 
   const searchFlights = () => {
     setShowFlights(true);
+    setCurrentIndex(0);
   };
 
   const handleDateChange = (date) => {
@@ -115,94 +118,201 @@ function SelectAirports(props) {
 
   return (
     <div>
-      <Stack
-        direction="row"
-        spacing={2}
-        alignItems="center"
-        sx={{ paddingTop: "5%", width: "100%" }}
-      >
-        <Typography sx={{ fontFamily: "Poppins", fontSize: "20px" }}>
-          From:
-        </Typography>
-        <AsyncSelect
-          cacheOptions
-          placeholder={"Sydney..."}
-          loadOptions={loadAirports}
-          defaultOptions={true}
-          value={departureAirport}
-          onChange={handleDepartureAirportChange}
-        />
-      </Stack>
-      <Stack
-        direction="row"
-        spacing={2}
-        alignItems="center"
-        sx={{ paddingTop: "5%", width: "100%" }}
-      >
-        <Typography sx={{ fontFamily: "Poppins", fontSize: "20px" }}>
-          To:
-        </Typography>
-        <AsyncSelect
-          cacheOptions
-          placeholder={"London..."}
-          loadOptions={(inputValue, callback) =>
-            loadAirports(inputValue, callback, departureAirport)
-          }
-          defaultOptions={true}
-          value={arrivalAirport}
-          onChange={handleArrivalAirportChange}
-        />
-      </Stack>
-      <Stack sx={{ paddingTop: "10%", width: "100%" }}>
-        <DatePicker
-          label="Select Date"
-          format="DD/MM/YYYY"
-          dateAdapter={AdapterDayjs}
-          value={selectedDate}
-          onChange={handleDateChange}
-        />
-      </Stack>
-      <Box
+      <Card
         sx={{
-          display: "flex",
-          flexDirection: "row",
-          width: "100%",
-          paddingTop: "5%",
-          justifyContent: "center",
+          width: "23%",
+          height: "75%",
+          left: "3%",
+          padding: "1%",
+          position: "absolute",
+          zIndex: 1,
+          borderRadius: "1%",
+          top: "53%",
+          transform: "translateY(-50%)",
+          backgroundColor: "rgba(237, 231, 225, 0.85)",
         }}
       >
-        <FormControlLabel
-          label="Round Trip"
-          value="roundTrip"
-          checked={flightType === "roundTrip"}
-          control={<Radio />}
-          onChange={handleFlightTypeChange}
-        />
-        <FormControlLabel
-          label="One Way"
-          value="departures"
-          checked={flightType === "departures"}
-          control={<Radio />}
-          onChange={handleFlightTypeChange}
-        />
-      </Box>
-      <Button variant="contained" onClick={searchFlights}>
-        Show Flights
-      </Button>
-      <Button variant="contained" onClick={handleClearSelections}>
-        Clear Route
-      </Button>
-      {showFlights && (
-        <SelectFlights
-          departureAirport={departureAirport}
-          arrivalAirport={arrivalAirport}
-          selectedDate={selectedDate}
-          flightType={flightType}
-          apiFlightType={apiFlightType}
-          userId={props.userId}
-          setUserId={props.setUserId}
-        />
-      )}
+        <Typography sx={{ fontFamily: "Poppins", fontSize: "20px" }}>
+          Search Flights
+        </Typography>
+        <Box
+          spacing={2}
+          sx={{ paddingTop: "1%", maxWidth: "100%", flexGrow: 1 }}
+        >
+          <Typography
+            sx={{
+              fontFamily: "Poppins",
+              fontSize: "15px",
+              mb: "1%",
+              textAlign: "left",
+            }}
+          >
+            From:
+          </Typography>
+          <AsyncSelect
+            cacheOptions
+            placeholder={"Sydney..."}
+            loadOptions={loadAirports}
+            defaultOptions={true}
+            value={departureAirport}
+            onChange={handleDepartureAirportChange}
+            menuPlacement="auto"
+            maxMenuHeight={120}
+          />
+        </Box>
+        <Box
+          spacing={1}
+          alignItems="center"
+          sx={{ paddingTop: "1%", maxWidth: "100%", flexGrow: 1 }}
+        >
+          <Typography
+            sx={{
+              fontFamily: "Poppins",
+              fontSize: "15px",
+              mb: "1%",
+              textAlign: "left",
+            }}
+          >
+            To:
+          </Typography>
+          <AsyncSelect
+            cacheOptions
+            placeholder={"London..."}
+            loadOptions={(inputValue, callback) =>
+              loadAirports(inputValue, callback, departureAirport)
+            }
+            defaultOptions={true}
+            value={arrivalAirport}
+            onChange={handleArrivalAirportChange}
+            menuPlacement="auto"
+            maxMenuHeight={120}
+          />
+        </Box>
+        <Box
+          spacing={1}
+          alignItems="center"
+          sx={{
+            paddingTop: "3%",
+            maxWidth: "100%",
+            flexGrow: 1,
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
+          <Typography
+            sx={{
+              fontFamily: "Poppins",
+              fontSize: "15px",
+              textAlign: "left",
+              marginRight: "7%",
+            }}
+          >
+            Date:
+          </Typography>
+          <DatePicker
+            format="DD/MM/YYYY"
+            dateAdapter={AdapterDayjs}
+            value={selectedDate}
+            onChange={handleDateChange}
+          />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            width: "100%",
+            paddingTop: "1%",
+            justifyContent: "center",
+          }}
+        >
+          <FormControlLabel
+            label={
+              <Typography
+                sx={{
+                  fontFamily: "Poppins",
+                  fontSize: "15px",
+                }}
+              >
+                Round Trip
+              </Typography>
+            }
+            value="roundTrip"
+            checked={flightType === "roundTrip"}
+            control={<Radio />}
+            onChange={handleFlightTypeChange}
+          />
+          <FormControlLabel
+            label={
+              <Typography
+                sx={{
+                  fontFamily: "Poppins",
+                  fontSize: "15px",
+                }}
+              >
+                One Way
+              </Typography>
+            }
+            value="departures"
+            checked={flightType === "departures"}
+            control={<Radio />}
+            onChange={handleFlightTypeChange}
+          />
+        </Box>
+        <Box
+          alignItems="center"
+          sx={{
+            paddingTop: "1%",
+            maxWidth: "100%",
+            flexGrow: 1,
+            display: "flex",
+            gap: "15%",
+            justifyContent: "center",
+            mb: "3%",
+          }}
+        >
+          <Button
+            color="success"
+            variant="contained"
+            onClick={searchFlights}
+            sx={{
+              fontFamily: "Poppins",
+              fontSize: "15px",
+            }}
+          >
+            Show Flights
+          </Button>
+          <Button
+            color="error"
+            variant="contained"
+            onClick={handleClearSelections}
+            sx={{
+              fontFamily: "Poppins",
+              fontSize: "15px",
+            }}
+          >
+            Clear Route
+          </Button>
+        </Box>
+        <Typography
+          sx={{ fontFamily: "Poppins", fontSize: "20px", textAlign: "left" }}
+        >
+          Flights:
+        </Typography>
+        {showFlights && (
+          <SelectFlights
+            departureAirport={departureAirport}
+            arrivalAirport={arrivalAirport}
+            selectedDate={selectedDate}
+            flightType={flightType}
+            apiFlightType={apiFlightType}
+            userId={props.userId}
+            setUserId={props.setUserId}
+            currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+            showFlights={showFlights}
+          />
+        )}
+      </Card>
     </div>
   );
 }

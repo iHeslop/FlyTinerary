@@ -43,49 +43,35 @@ function HomeScreen(props) {
   ];
   return (
     <div style={{ overflow: "hidden", position: "relative" }}>
-      <Card
-        sx={{
-          width: "20%",
-          height: "60%",
-          left: "3%",
-          padding: "1%",
-          position: "absolute",
-          zIndex: 2,
-          borderRadius: "2%",
-          top: "50%",
-          transform: "translateY(-50%)",
-          backgroundColor: "rgba(255, 255, 255, 0.75)",
+      <NavBar
+        fName={props.fName}
+        onFNameChange={props.onFNameChange}
+        setFname={props.setFname}
+      />
+
+      <SelectAirports
+        departureAirport={departureAirport}
+        arrivalAirport={arrivalAirport}
+        onDepartureAirportChange={handleDepartureAirportChange}
+        onArrivalAirportChange={handleArrivalAirportChange}
+        setSelectedAirports={(departure, arrival) => {
+          setDepartureAirport(departure);
+          setArrivalAirport(arrival);
         }}
-      >
-        <NavBar
-          fName={props.fName}
-          onFNameChange={props.onFNameChange}
-          setFname={props.setFname}
-        />
-        <SelectAirports
-          departureAirport={departureAirport}
-          arrivalAirport={arrivalAirport}
-          onDepartureAirportChange={handleDepartureAirportChange}
-          onArrivalAirportChange={handleArrivalAirportChange}
-          setSelectedAirports={(departure, arrival) => {
-            setDepartureAirport(departure);
-            setArrivalAirport(arrival);
-          }}
-          setisRouteShown={setisRouteShown}
-          isSelectionMade={isSelectionMade}
-          setIsSelectionMade={setIsSelectionMade}
-          clearData={clearData}
-          userId={props.userId}
-          setUserId={props.setUserId}
-        />
-      </Card>
+        setisRouteShown={setisRouteShown}
+        isSelectionMade={isSelectionMade}
+        setIsSelectionMade={setIsSelectionMade}
+        clearData={clearData}
+        userId={props.userId}
+        setUserId={props.setUserId}
+      />
 
       <Globe
         style={{
           position: "fixed",
           width: "100%",
           height: "100%",
-          zIndex: "-1",
+          zIndex: "0",
         }}
         key={props.isRouteShown ? "showRoute" : "hideRoute"}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"

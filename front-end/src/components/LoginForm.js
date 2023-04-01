@@ -76,7 +76,7 @@ function LoginForm(props) {
               flexDirection: "column",
               alignItems: "center",
               boxShadow: 5,
-              backgroundColor: "rgba(255, 255, 255, 0.9)",
+              backgroundColor: "rgba(237, 231, 225, 0.95)",
               borderRadius: 13,
               padding: 3,
             }}
@@ -172,7 +172,7 @@ function LoginForm(props) {
               flexDirection: "column",
               alignItems: "center",
               boxShadow: 5,
-              backgroundColor: "rgba(255, 255, 255, 0.9)",
+              backgroundColor: "rgba(205, 209, 228, 0.95)",
               borderRadius: 13,
               padding: 3,
             }}
