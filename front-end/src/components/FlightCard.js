@@ -8,7 +8,6 @@ import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArro
 import axios from "axios";
 
 function FlightCard(props) {
-  const [showButton, setShowButton] = useState(false);
   const [showInfo, setShowInfo] = useState(true);
 
   useEffect(() => {
@@ -20,7 +19,6 @@ function FlightCard(props) {
 
   const handleCardSelect = () => {
     setShowInfo(!showInfo);
-    setShowButton(!showButton);
   };
 
   const handleAddToItinerary = async (event) => {
@@ -45,6 +43,9 @@ function FlightCard(props) {
         arrIata2: props.arrIata2,
         arrTime2: props.arrTime2,
         arrDate2: props.arrDate2,
+        arrDate3: props.arrDate3,
+        arrIata3: props.arrIata3,
+        arrTime3: props.arrTime3,
       })
       .then((response) => {
         console.log(response);
@@ -56,7 +57,7 @@ function FlightCard(props) {
     <Card
       sx={{
         width: "auto",
-        height: "auto",
+        height: "105px",
         m: 1.5,
         boxShadow: 5,
         overflow: "hidden",
@@ -144,13 +145,25 @@ function FlightCard(props) {
             }}
           >
             <Typography variant="h5" color="text.secondary">
-              {props.arrIata2 || props.arrIata1}
+              {props.arrIata3
+                ? props.arrIata3
+                : props.arrIata2
+                ? props.arrIata2
+                : props.arrIata1}
             </Typography>
             <Typography color="text.secondary" sx={{ fontSize: "16px" }}>
-              {props.arrTime2 || props.arrTime1}
+              {props.arrTime3
+                ? props.arrTime3
+                : props.arrTime2
+                ? props.arrTime2
+                : props.arrTime1}
             </Typography>
             <Typography color="text.secondary" sx={{ fontSize: "12px" }}>
-              {props.arrDate2 || props.arrDate1}
+              {props.arrDate3
+                ? props.arrDate3
+                : props.arrDate2
+                ? props.arrDate2
+                : props.arrDate1}
             </Typography>
           </Box>
           <Box>
@@ -173,6 +186,7 @@ function FlightCard(props) {
             alignItems: "center",
             justifyContent: "center",
             mb: -1,
+            height: "75%",
           }}
         >
           <Button

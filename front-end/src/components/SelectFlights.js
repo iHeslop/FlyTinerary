@@ -104,6 +104,10 @@ function SelectFlights(props) {
                         flights[key].slice_data.slice_0.flight_data.flight_1
                           ?.arrival.airport.code
                       }
+                      arrIata3={
+                        flights[key].slice_data.slice_0.flight_data.flight_2
+                          ?.arrival.airport.code
+                      }
                       depTime1={
                         flights[key].slice_data.slice_0.flight_data.flight_0
                           .departure.datetime.time_24h
@@ -120,6 +124,10 @@ function SelectFlights(props) {
                         flights[key].slice_data.slice_0.flight_data.flight_1
                           ?.arrival.datetime.time_24h
                       }
+                      arrTime3={
+                        flights[key].slice_data.slice_0.flight_data.flight_2
+                          ?.arrival.datetime.time_24h
+                      }
                       depDate1={
                         flights[key].slice_data.slice_0.flight_data.flight_0
                           .departure.datetime.date
@@ -134,6 +142,10 @@ function SelectFlights(props) {
                       }
                       arrDate2={
                         flights[key].slice_data.slice_0.flight_data.flight_1
+                          ?.arrival.datetime.date
+                      }
+                      arrDate3={
+                        flights[key].slice_data.slice_0.flight_data.flight_2
                           ?.arrival.datetime.date
                       }
                     />

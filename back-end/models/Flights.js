@@ -40,6 +40,9 @@ Flight.init(
     arrIata2: { type: DataTypes.STRING },
     arrTime2: { type: DataTypes.STRING },
     arrDate2: { type: DataTypes.STRING },
+    arrIata3: { type: DataTypes.STRING },
+    arrTime3: { type: DataTypes.STRING },
+    arrDate3: { type: DataTypes.STRING },
   },
   {
     sequelize: sequelizeInstance,

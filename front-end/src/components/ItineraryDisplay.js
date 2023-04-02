@@ -27,7 +27,6 @@ function ItineraryDisplay(props) {
     }
     getDisplayFlights();
   }, [rerender]);
-  console.log(displayFlights);
 
   // Code for Displaying Saved Flights on Globe
   useEffect(() => {
@@ -38,9 +37,9 @@ function ItineraryDisplay(props) {
       );
       const myDataFlights = response.data.data;
       const updatedFlights = myDataFlights.map((flight) => {
-        const { depIata1, arrIata1, arrIata2 } = flight;
+        const { depIata1, arrIata1, arrIata2, arrIata3 } = flight;
 
-        const arrIata = arrIata2 || arrIata1;
+        const arrIata = arrIata3 ? arrIata3 : arrIata2 ? arrIata2 : arrIata1;
         return [depIata1, arrIata];
       });
 
@@ -77,6 +76,7 @@ function ItineraryDisplay(props) {
         }
         setAirports(updatedAirports);
         setisLoaded(true);
+        setRerender(true);
       }
     }
     fetchAirports();
@@ -91,8 +91,7 @@ function ItineraryDisplay(props) {
         onFNameChange={props.onFNameChange}
         setFname={props.setFname}
       />
-      {!isLoaded && airports.length > 0 && <LinearProgress />}
-      {isLoaded && airports.length > 0 && (
+      {isLoaded && airports.length != 0 && (
         <div>
           <Card
             sx={{
@@ -141,6 +140,9 @@ function ItineraryDisplay(props) {
                     arrDate1={displayFlights[key]?.arrDate1}
                     depDate2={displayFlights[key]?.depDate2}
                     arrDate2={displayFlights[key]?.arrDate2}
+                    arrDate3={displayFlights[key]?.arrDate3}
+                    arrTime3={displayFlights[key]?.arrTime3}
+                    arrIata3={displayFlights[key]?.arrIata3}
                   />
                 </Grid>
               ))}

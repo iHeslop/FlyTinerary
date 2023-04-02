@@ -8,10 +8,9 @@ import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArro
 import axios from "axios";
 
 function ItineraryFlightCard(props) {
-  const [showButton, setShowButton] = useState(false);
-
+  const [showInfo, setShowInfo] = useState(true);
   const handleCardSelect = () => {
-    setShowButton(!showButton);
+    setShowInfo(!showInfo);
   };
 
   const handleDeleteFromItinerary = async (event) => {
@@ -22,14 +21,14 @@ function ItineraryFlightCard(props) {
         console.log(response);
       });
     alert("Flight removed from your Itinerary!");
-    props.setRerender((prev) => !prev);
+    props.setRerender(false);
   };
 
   return (
     <Card
       sx={{
         width: "auto",
-        height: "auto",
+        height: "105px",
         m: 1.5,
         boxShadow: 5,
         overflow: "hidden",
@@ -43,7 +42,7 @@ function ItineraryFlightCard(props) {
       style={{ backgroundColor: "white" }}
       onClick={handleCardSelect}
     >
-      {!showButton && (
+      {showInfo && (
         <CardContent
           sx={{
             display: "flex",
@@ -116,14 +115,20 @@ function ItineraryFlightCard(props) {
               width: "18%",
             }}
           >
-            <Typography variant="h5" color="text.secondary">
-              {props.arrIata2}
-            </Typography>
+            <Typography variant="h5" color="text.secondary"></Typography>
             <Typography color="text.secondary" sx={{ fontSize: "16px" }}>
-              {props.arrTime2}
+              {props.arrTime3
+                ? props.arrTime3
+                : props.arrTime2
+                ? props.arrTime2
+                : props.arrTime1}
             </Typography>
             <Typography color="text.secondary" sx={{ fontSize: "12px" }}>
-              {props.arrDate2}
+              {props.arrDate3
+                ? props.arrDate3
+                : props.arrDate2
+                ? props.arrDate2
+                : props.arrDate1}
             </Typography>
           </Box>
           <Box>
@@ -138,7 +143,7 @@ function ItineraryFlightCard(props) {
           </Box>
         </CardContent>
       )}
-      {showButton && (
+      {!showInfo && (
         <CardContent
           sx={{
             display: "flex",
@@ -146,6 +151,7 @@ function ItineraryFlightCard(props) {
             alignItems: "center",
             justifyContent: "center",
             mb: -1,
+            height: "75%",
           }}
         >
           <Button
