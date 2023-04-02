@@ -27,6 +27,7 @@ function SelectFlights(props) {
     },
   };
 
+  //Getting flights data from API
   useEffect(() => {
     axios
       .request(options)
@@ -44,12 +45,13 @@ function SelectFlights(props) {
       });
   }, [props.showFlights]);
 
+  //Previous button
   const handlePrevClick = () => {
     if (props.currentIndex > 0) {
       props.setCurrentIndex(props.currentIndex - 6);
     }
   };
-
+  //Next button
   const handleNextClick = () => {
     if (props.currentIndex < Object.keys(flights).length - 6) {
       props.setCurrentIndex(props.currentIndex + 6);
@@ -71,7 +73,7 @@ function SelectFlights(props) {
           No Flights Found
         </Typography>
       )}
-      {isLoaded && flights.length != 0 && (
+      {isLoaded && flights.length !== 0 && (
         <div>
           <div style={{ height: "280px", overflowY: "scroll" }}>
             <Box wrap="wrap">

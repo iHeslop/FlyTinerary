@@ -9,13 +9,16 @@ import axios from "axios";
 
 function ItineraryFlightCard(props) {
   const [showInfo, setShowInfo] = useState(true);
+
+  //Set whether the flight info is displayed or not
   const handleCardSelect = () => {
     setShowInfo(!showInfo);
   };
 
+  //Delete Flight Details from Database by flightID
   const handleDeleteFromItinerary = async (event) => {
     event.preventDefault();
-    const response = await axios
+    await axios
       .delete(`http://localhost:4000/flights/${props.flightId}`)
       .then((response) => {
         console.log(response);

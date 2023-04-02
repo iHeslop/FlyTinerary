@@ -22,13 +22,11 @@ function LoginForm(props) {
   const [password, setPassword] = useState("");
   const [lName, setLname] = useState("");
 
+  //Check if User is in database by email and password check
   const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await axios.get("http://localhost:4000/users");
     const users = response.data.data;
-    users.forEach((user) => {
-      const { email, password } = user;
-    });
     const user = users.find(
       (user) => user.email === email && user.password === password
     );
@@ -41,9 +39,10 @@ function LoginForm(props) {
     }
   };
 
+  //Add User to Database on Sign Up
   const handleSignUp = async (event) => {
     event.preventDefault();
-    const response = await axios
+    await axios
       .post("http://localhost:4000/users/create", {
         fname: props.fName,
         lname: lName,

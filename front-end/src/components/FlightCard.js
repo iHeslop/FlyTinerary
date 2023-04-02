@@ -10,20 +10,23 @@ import axios from "axios";
 function FlightCard(props) {
   const [showInfo, setShowInfo] = useState(true);
 
+  //Get UserID from Local Storage
   useEffect(() => {
     const userIdStorage = localStorage.getItem("userId");
     if (userIdStorage) {
       props.setUserId(userIdStorage);
     }
-  }, []);
+  });
 
+  //Set whether the flight info is displayed or not
   const handleCardSelect = () => {
     setShowInfo(!showInfo);
   };
 
+  //Add to MyItinerary Button Axios
   const handleAddToItinerary = async (event) => {
     event.preventDefault();
-    const response = await axios
+    await axios
       .post("http://localhost:4000/flights/create", {
         name: props.name,
         userId: props.userId,

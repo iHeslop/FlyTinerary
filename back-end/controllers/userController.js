@@ -1,6 +1,7 @@
 "use strict";
 const Models = require("../models");
 
+//Get Users in Database
 const getUsers = (res) => {
   Models.User.findAll({})
     .then(function (data) {
@@ -11,6 +12,7 @@ const getUsers = (res) => {
     });
 };
 
+//Add User to Database
 const createUsers = (data, res) => {
   Models.User.create(data)
     .then(function (data) {
@@ -21,6 +23,7 @@ const createUsers = (data, res) => {
     });
 };
 
+//Update User in Database
 const updateUsers = (req, res) => {
   let userId = req.params.id;
   Models.User.update(req.body, { where: { id: userId } })
@@ -32,6 +35,7 @@ const updateUsers = (req, res) => {
     });
 };
 
+//Delete User from Database
 const deleteUsers = (req, res) => {
   let userId = req.params.id;
   Models.User.destroy({ where: { id: userId } })

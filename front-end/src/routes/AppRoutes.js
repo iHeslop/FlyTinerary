@@ -9,11 +9,12 @@ export const AppRoutes = () => {
   const [fName, setFname] = useState("");
   const [userId, setUserId] = useState("");
 
+  //First Name Set at highest level
   const handlefNameChange = (newFname) => {
     setFname(newFname);
     localStorage.setItem("fName", newFname);
   };
-
+  //UserId Set at highest level
   const handleUserIdChange = (newUserId) => {
     setUserId(newUserId);
     localStorage.setItem("userId", newUserId);

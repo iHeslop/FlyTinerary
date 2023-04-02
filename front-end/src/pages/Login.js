@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import LoginForm from "../components/LoginForm";
-import { Typography } from "@mui/material";
 import Video from "../assets/Pexels Videos 1851190.mp4";
 
 function Login(props) {

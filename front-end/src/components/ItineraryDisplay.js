@@ -3,7 +3,6 @@ import Globe from "react-globe.gl";
 import axios from "axios";
 import ItineraryFlightCard from "./ItineraryFlightCard";
 import Grid from "@mui/material/Grid";
-import LinearProgress from "@mui/material/LinearProgress";
 import { Card, Button } from "@mui/material";
 import NavBar from "../components/NavBar";
 import Typography from "@mui/material/Typography";
@@ -16,7 +15,7 @@ function ItineraryDisplay(props) {
   const [isLoaded, setisLoaded] = useState(false);
   const [rerender, setRerender] = useState(false);
 
-  // Code for Displaying Saved Flights on Cards
+  // Code for Displaying Saved Flights on FlightCards
   useEffect(() => {
     async function getDisplayFlights() {
       const response = await axios.get(
@@ -26,7 +25,7 @@ function ItineraryDisplay(props) {
       setDisplayFlights(myFlights);
     }
     getDisplayFlights();
-  }, [rerender]);
+  }, [rerender, userId]);
 
   // Code for Displaying Saved Flights on Globe
   useEffect(() => {
@@ -46,7 +45,7 @@ function ItineraryDisplay(props) {
       setMyFlights(updatedFlights);
     }
     fetchFlights();
-  }, [rerender]);
+  }, [rerender, userId]);
 
   useEffect(() => {
     async function fetchAirports() {
@@ -82,8 +81,6 @@ function ItineraryDisplay(props) {
     fetchAirports();
   }, [myFlights, rerender]);
 
-  console.log(myFlights);
-
   return (
     <div style={{ overflow: "hidden", position: "relative" }}>
       <NavBar
@@ -91,7 +88,7 @@ function ItineraryDisplay(props) {
         onFNameChange={props.onFNameChange}
         setFname={props.setFname}
       />
-      {isLoaded && airports.length != 0 && (
+      {isLoaded && airports.length !== 0 && (
         <div>
           <Card
             sx={{

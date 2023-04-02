@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import ItineraryDisplay from "../components/ItineraryDisplay";
 
 function Itinerary(props) {
+  //Getting First Name and UserID from local storage
   useEffect(() => {
     const fNameStorage = localStorage.getItem("fName");
     if (fNameStorage) {
@@ -11,7 +12,7 @@ function Itinerary(props) {
     if (userIdStorage) {
       props.setUserId(userIdStorage);
     }
-  }, []);
+  });
 
   return (
     <div>

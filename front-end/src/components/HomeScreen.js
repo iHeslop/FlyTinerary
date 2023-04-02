@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Globe from "react-globe.gl";
 import SelectAirports from "../components/SelectAirports";
 import NavBar from "../components/NavBar";
-import { Card } from "@mui/material";
 
 function HomeScreen(props) {
   const [departureAirport, setDepartureAirport] = useState("");
@@ -10,23 +9,24 @@ function HomeScreen(props) {
   const [isRouteShown, setisRouteShown] = useState(false);
   const [isSelectionMade, setIsSelectionMade] = useState(false);
 
+  //Reset Departure and Arrival Airports
   const clearData = () => {
     setDepartureAirport("");
     setArrivalAirport("");
   };
-
+  //Handle when the Departure Airport changes by User Input -> Set the value
   const handleDepartureAirportChange = (selectedOption) => {
     if (selectedOption && selectedOption.value !== arrivalAirport?.value) {
       setDepartureAirport(selectedOption);
     }
   };
-
+  //Handle when the Arrival Airport changes by User Input -> Set the value
   const handleArrivalAirportChange = (selectedOption) => {
     if (selectedOption && selectedOption.value !== departureAirport?.value) {
       setArrivalAirport(selectedOption);
     }
   };
-
+  //Formats the routeData const to be used by the Globe component
   const routeData = [
     {
       depPort: {
@@ -73,7 +73,7 @@ function HomeScreen(props) {
           height: "100%",
           zIndex: "0",
         }}
-        key={props.isRouteShown ? "showRoute" : "hideRoute"}
+        key={isRouteShown ? "showRoute" : "hideRoute"}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
         backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
         // Arcs Code

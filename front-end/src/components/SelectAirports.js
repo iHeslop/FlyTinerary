@@ -19,12 +19,14 @@ function SelectAirports(props) {
   const [apiFlightType, setApiFlightType] = useState("getAirFlightRoundTrip");
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  //Get Airports data from Database
   useEffect(() => {
     axios.get("http://localhost:4000/airports/").then((response) => {
       setAirports(response.data.data);
     });
   }, []);
 
+  //Search function/filter through data
   const filterAirports = (inputValue, selectedOption) => {
     const filteredAirports = airports
       .filter(
@@ -44,6 +46,7 @@ function SelectAirports(props) {
     }
   };
 
+  //Map found airports and set variables for display on globe
   const loadAirports = (inputValue, callback, selectedOption) => {
     const filteredAirports = filterAirports(inputValue, selectedOption);
     const options = filteredAirports.map((airport) => ({
@@ -69,6 +72,8 @@ function SelectAirports(props) {
       }, 1000);
     }
   };
+
+  //Set Departure Airport value on user input
   const handleDepartureAirportChange = (selectedOption) => {
     if (selectedOption && selectedOption.value !== arrivalAirport?.value) {
       setDepartureAirport(selectedOption);
@@ -76,6 +81,7 @@ function SelectAirports(props) {
     }
   };
 
+  //Set Arrival Airport value on user input
   const handleArrivalAirportChange = (selectedOption) => {
     if (selectedOption && selectedOption.value !== departureAirport?.value) {
       setArrivalAirport(selectedOption);
@@ -83,6 +89,7 @@ function SelectAirports(props) {
     }
   };
 
+  //Reset variables on Clear
   const handleClearSelections = () => {
     setDepartureAirport("");
     setArrivalAirport("");
@@ -96,17 +103,18 @@ function SelectAirports(props) {
     setCurrentIndex(0);
   };
 
-  //Flights Code
-
+  //Flights Display/Index Code
   const searchFlights = () => {
     setShowFlights(true);
     setCurrentIndex(0);
   };
 
+  //Set Date for API call
   const handleDateChange = (date) => {
     setselectedDate(date);
   };
 
+  //Set Flight Type for API call
   const handleFlightTypeChange = (e) => {
     setFlightType(e.target.value);
     if (e.target.value === "departures") {

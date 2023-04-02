@@ -1,6 +1,7 @@
 "use strict";
 const Models = require("../models");
 
+//Get Airports from Database
 const getFlights = (res) => {
   Models.Flight.findAll({})
     .then(function (data) {
@@ -11,6 +12,7 @@ const getFlights = (res) => {
     });
 };
 
+//Get Airports from Database by UserID
 const getUserFlights = (req, res) => {
   Models.Flight.findAll({
     where: { userId: req.params.id },
@@ -23,6 +25,7 @@ const getUserFlights = (req, res) => {
     });
 };
 
+//Add Flights to Database
 const createFlights = (data, res) => {
   Models.Flight.create(data)
     .then(function (data) {
@@ -33,6 +36,7 @@ const createFlights = (data, res) => {
     });
 };
 
+//Updates Flights in Database by FlightID
 const updateFlights = (req, res) => {
   let flightId = req.params.id;
   Models.Flight.update(req.body, { where: { id: flightId } })
@@ -44,6 +48,7 @@ const updateFlights = (req, res) => {
     });
 };
 
+//Delete Flights in Databse by FlightID
 const deleteFlights = (req, res) => {
   let flightId = req.params.flightId;
   Models.Flight.destroy({ where: { flightId: flightId } })

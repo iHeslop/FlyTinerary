@@ -11,6 +11,7 @@ const options = {
   },
 };
 
+//Get Airports from Database
 const getAirports = (res) => {
   Models.Airport.findAll({})
     .then(function (data) {
@@ -21,6 +22,7 @@ const getAirports = (res) => {
     });
 };
 
+//Get Airports from Database by  IATA
 const getIataAirports = (req, res) => {
   Models.Airport.findAll({
     where: { iata: req.params.iata },
@@ -33,6 +35,7 @@ const getIataAirports = (req, res) => {
     });
 };
 
+//Add Airports to Database
 const createAirports = (data, res) => {
   Models.Airport.create(data)
     .then(function (data) {
@@ -43,6 +46,7 @@ const createAirports = (data, res) => {
     });
 };
 
+//Update Airports in Database by id
 const updateAirports = (req, res) => {
   let airportId = req.params.id;
   Models.Airport.update(req.body, { where: { id: airportId } })
@@ -54,6 +58,7 @@ const updateAirports = (req, res) => {
     });
 };
 
+//Delete Airports in Database by id
 const deleteAirports = (req, res) => {
   let airportId = req.params.id;
   Models.Airport.destroy({ where: { id: airportId } })
@@ -65,8 +70,8 @@ const deleteAirports = (req, res) => {
     });
 };
 
+//Store Airports in Database from External API
 const storeAirports = async (req, res) => {
-  //add if statement if already filled out
   let data = await axios.request(options);
   let apiData = data.data["getSharedBOF2.Downloads.Air.Airports"];
   let airportsArray = Object.values(apiData.results.airports);

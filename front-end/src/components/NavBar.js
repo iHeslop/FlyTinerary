@@ -13,24 +13,29 @@ import { Menu, MenuItem } from "@mui/material";
 function NavBar(props) {
   const [anchorEl, setAnchorEl] = useState(null);
 
+  //Clears local storage and reroutes to login page
   const handleLogout = () => {
     localStorage.clear();
     window.location.href = "/";
   };
 
+  //Open dropdown menu
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
+  //Close dropdown menu
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+  //Get First Name info from local storage
   useEffect(() => {
     const fNameStorage = localStorage.getItem("fName");
     if (fNameStorage) {
       props.setFname(fNameStorage);
     }
-  }, []);
+  });
+
   return (
     <AppBar
       position="absolute"
