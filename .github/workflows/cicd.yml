@@ -43,7 +43,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./front-end
-          file: ./Dockerfile
+          file: ./front-end/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/flytinerary_frontend:latest
 
