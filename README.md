@@ -1,4 +1,4 @@
-# FlyTinerary
+FlyTinerary
 
   FlyTinerary is an essential tool for travellers looking to visualize their adventures, in a beautiful and simple way. Use this application to visualize your flight routes, search for real-time flight data and add selected flights to personal itineraries. 
 
