@@ -48,7 +48,7 @@ const updateFlights = (req, res) => {
     });
 };
 
-//Delete Flights in Databse by FlightID
+//Delete Flights in Database by FlightID
 const deleteFlights = (req, res) => {
   let flightId = req.params.flightId;
   Models.Flight.destroy({ where: { flightId: flightId } })
