@@ -3,12 +3,31 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import axios from "axios";
 
 function ItineraryFlightCard(props) {
   const [showInfo, setShowInfo] = useState(true);
+  const [flightPrice, setFlightPrice] = useState("");
+  const [showInput, setShowInput] = useState(false);
+
+  const handleShowInput = () => {
+    setShowInput(true);
+  };
+
+  const handleCloseInput = () => {
+    setShowInput(false);
+  };
+
+  const handlePriceChange = () => {
+    if (flightPrice === "") {
+      alert("Please enter a valid price.");
+    } else {
+      handleSubmit();
+      handleCloseInput();
+    }
+  };
 
   //Set whether the flight info is displayed or not
   const handleCardSelect = () => {
@@ -24,9 +43,23 @@ function ItineraryFlightCard(props) {
         console.log(response);
       });
     alert("Flight removed from your Itinerary!");
-    props.setRerender(false);
+    props.setRerender(!props.rerender);
   };
 
+  //Update flight price in database
+  const handleSubmit = async () => {
+    await axios
+      .put(`http://localhost:4000/flights/${props.flightId}`, {
+        price: flightPrice,
+      })
+      .then((response) => {
+        console.log(response);
+      });
+    alert("Flight price updated!");
+    props.setRerender(!props.rerender);
+  };
+
+  console.log(flightPrice);
   return (
     <Card
       sx={{
@@ -118,7 +151,13 @@ function ItineraryFlightCard(props) {
               width: "18%",
             }}
           >
-            <Typography variant="h5" color="text.secondary"></Typography>
+            <Typography variant="h5" color="text.secondary">
+              {props.arrIata3
+                ? props.arrIata3
+                : props.arrIata2
+                ? props.arrIata2
+                : props.arrIata1}
+            </Typography>
             <Typography color="text.secondary" sx={{ fontSize: "16px" }}>
               {props.arrTime3
                 ? props.arrTime3
@@ -153,10 +192,22 @@ function ItineraryFlightCard(props) {
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "center",
-            mb: -1,
-            height: "75%",
+
+            gap: 4,
           }}
         >
+          <Button
+            color="success"
+            variant="contained"
+            onClick={handleShowInput}
+            sx={{
+              fontFamily: "Poppins",
+              fontSize: "15px",
+              m: "auto",
+            }}
+          >
+            Change Flight Price
+          </Button>
           <Button
             color="error"
             variant="contained"
@@ -164,9 +215,56 @@ function ItineraryFlightCard(props) {
             sx={{
               fontFamily: "Poppins",
               fontSize: "15px",
+              m: "auto",
             }}
           >
-            Remove from MyItinerary
+            Remove from Itinerary
+          </Button>
+        </CardContent>
+      )}
+      {showInput && (
+        <CardContent
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            mb: -1,
+            gap: 1,
+            height: "70%",
+          }}
+        >
+          <TextField
+            autoFocus
+            margin="dense"
+            id="price"
+            label="Price"
+            type="number"
+            fullWidth
+            value={flightPrice}
+            onChange={(e) => setFlightPrice(e.target.value)}
+          />
+          <Button
+            color="success"
+            variant="contained"
+            onClick={handlePriceChange}
+            sx={{
+              fontFamily: "Poppins",
+              fontSize: "15px",
+            }}
+          >
+            Submit
+          </Button>
+          <Button
+            color="error"
+            variant="contained"
+            onClick={handleCloseInput}
+            sx={{
+              fontFamily: "Poppins",
+              fontSize: "15px",
+            }}
+          >
+            Cancel
           </Button>
         </CardContent>
       )}

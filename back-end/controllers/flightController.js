@@ -38,8 +38,8 @@ const createFlights = (data, res) => {
 
 //Updates Flights in Database by FlightID
 const updateFlights = (req, res) => {
-  let flightId = req.params.id;
-  Models.Flight.update(req.body, { where: { id: flightId } })
+  let flightId = req.params.flightId;
+  Models.Flight.update(req.body, { where: { flightId: flightId } })
     .then(function (data) {
       res.send({ result: 200, data: data });
     })

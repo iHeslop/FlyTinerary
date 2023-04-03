@@ -15,7 +15,7 @@ router.post("/create", (req, res) => {
   Controllers.flightController.createFlights(req.body, res);
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:flightId", (req, res) => {
   Controllers.flightController.updateFlights(req, res);
 });
 

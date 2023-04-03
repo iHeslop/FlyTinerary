@@ -113,10 +113,11 @@ function ItineraryDisplay(props) {
             >
               Saved Flights:
             </Typography>
-            <Grid wrap="wrap" container spacing={2}>
+            <Grid wrap="wrap">
               {Object.keys(displayFlights).map((key) => (
                 <Grid item xs={12} md={12} lg={12} key={key}>
                   <ItineraryFlightCard
+                    rerender={rerender}
                     setRerender={setRerender}
                     flightId={displayFlights[key]?.flightId}
                     price={displayFlights[key]?.price}
