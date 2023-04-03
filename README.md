@@ -13,7 +13,7 @@ Key Features:
   * See all your saved flights visually on the globe
   * Remove flights, and update flight costs from within your itinerary
 
-Dependencies: 
+Technologies || Dependencies: 
 * Node JS
 * Express JS
 * React
@@ -21,7 +21,7 @@ Dependencies:
 * MySQL
 * RapidAPI : Priceline com Provider
 
-## Motivation
+## Motivation || Inspiration
 Organising a holiday is exciting, but often times the planning is boring and repetitive. FlyTinerary aims to encourage adventure and reduce stress by providing a simple, no fuss UI which graphically visualizes your flights across the globe. Having all your flight information in one place and being able to update your flight information with ease, Flytinerary provides a simple, no-fuss approach to air travel. 
 
 ## Requirements
@@ -30,7 +30,7 @@ To run this code locally you will need:
 * [React](https://react.dev/ "React")
 * [mySQL](https://www.mysql.com/ "mySQL")
 
-## Installation | Getting Started
+## Installation || Getting Started
 
 
 
