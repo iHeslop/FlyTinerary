@@ -56,5 +56,8 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/flytinerary_backend:latest
 
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+      - name: Image digest front-end
+        run: echo ${{ steps.docker_build_front-end.outputs.digest }}
+
+      - name: Image digest back-end
+        run: echo ${{ steps.docker_build_back-end.outputs.digest }}
