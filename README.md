@@ -35,5 +35,5 @@ To run this code locally you will need:
 
 
 ## Reference
-* [Priceline com Provider API]([https://nodejs.org/en](https://rapidapi.com/tipsters/api/priceline-com-provider) "Priceline com Provider API")
+* [Priceline com Provider API](https://rapidapi.com/tipsters/api/priceline-com-provider "Priceline com Provider API")
 
