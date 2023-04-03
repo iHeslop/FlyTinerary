@@ -13,7 +13,7 @@ Key Features:
   * See all your saved flights visually on the globe
   * Remove flights, and update flight costs from within your itinerary
 
-Technologies || Dependencies: 
+Dependencies: 
 * Node JS
 * Express JS
 * React
