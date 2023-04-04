@@ -23,7 +23,7 @@ Dependencies:
 * RapidAPI : Priceline com Provider
 
 ## Motivation || Inspiration
-Organising a holiday is exciting, but often times the planning is boring and repetitive. FlyTinerary aims to encourage adventure and reduce stress by providing a simple, no fuss UI which graphically visualizes your flights across the globe. Having all your flight information in one place and being able to update your flight information with ease, Flytinerary provides a simple, no-fuss approach to air travel. 
+Organising a holiday is exciting, but often the planning is boring and repetitive. FlyTinerary aims to encourage adventure and reduce stress by providing a simple, no fuss UI which graphically visualizes your flights across the globe. Having all your flight information in one place and being able to update your flight information with ease, Flytinerary provides a simple, no-fuss approach to air travel. 
 
 ## Requirements
 To run this code locally you will need:
