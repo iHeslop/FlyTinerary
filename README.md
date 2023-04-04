@@ -46,7 +46,7 @@ cd back-end
 npm install
 
 // Install the frontend:
-cd frontend
+cd front-end
 npm install --legacy-peer-deps
 ```
 
