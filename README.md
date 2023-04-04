@@ -33,6 +33,41 @@ To run this code locally you will need:
 
 ## Installation || Getting Started
 
+To run this code locally: 
+
+Method 1: Github Clone
+
+```
+git clone https://github.com/iHeslop/FlyTinerary.git
+cd Flytinerary 
+
+// Install the Backend: 
+cd back-end
+npm install
+
+// Install the frontend:
+cd frontend
+npm install --legacy-peer-deps
+```
+
+Method 2: Docker Container (Frontend only)
+* [Docker Frontend](https://hub.docker.com/r/iheslop/flytinerary_frontend)
+
+
+Once installed, both methods will require a mySQL Database:
+1. First create a .env file in the "flytinerary/backend" folder containing this information: 
+```
+DB_NAME=flytinerary
+DB_USER=*your user here*
+DB_PASSWORD=*your password here*
+DB_HOST=localhost
+DB_PORT=3306
+```
+2. In mySQL workbench, create a new schema called *flytinerary*.
+
+*Remember to update the DB_USER and the DB_PASSWORD in the .env file with your local user and password*
+
+3. FlyTinerary should be set up and ready to go! Just run ``` npm start ``` in both the back-end and front-end folders. If you can login/sign-up the database is working!
 
 
 ## Reference
