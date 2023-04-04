@@ -67,7 +67,9 @@ DB_PORT=3306
 
 *Remember to update the DB_USER and the DB_PASSWORD in the .env file with your local user and password*
 
-3. FlyTinerary should be set up and ready to go! Just run ``` npm start ``` in both the back-end and front-end folders. If you can login/sign-up the database is working!
+3. Execute the SQL query in the flytinerary-queries file in this repository to set up your initial database table. 
+
+4. FlyTinerary should be set up and ready to go! Just run ``` npm start ``` in both the back-end and front-end folders. If you can login/sign-up the database is working!
 
 
 ## Reference
