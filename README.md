@@ -47,7 +47,7 @@ npm install
 
 // Install the frontend:
 cd front-end
-npm install --legacy-peer-deps
+npm install
 ```
 
 Method 2: Docker Container (Frontend only)
