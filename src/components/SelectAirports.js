@@ -14,7 +14,9 @@ function SelectAirports(props) {
   const [arrivalAirport, setArrivalAirport] = useState("");
   const [airports, setAirports] = useState([]);
   const [showFlights, setShowFlights] = useState(false);
-  const [selectedDate, setselectedDate] = useState(dayjs());
+  const [selectedDate, setselectedDate] = useState(
+    dayjs().format("YYYY-MM-DD")
+  );
   const [flightType, setFlightType] = useState("roundTrip");
   const [apiFlightType, setApiFlightType] = useState("getAirFlightRoundTrip");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -111,7 +113,9 @@ function SelectAirports(props) {
 
   //Set Date for API call
   const handleDateChange = (date) => {
-    setselectedDate(date);
+    const formattedDate = dayjs(date).format("YYYY-MM-DD");
+    setselectedDate(formattedDate);
+    console.log(formattedDate);
   };
 
   //Set Flight Type for API call
@@ -220,7 +224,7 @@ function SelectAirports(props) {
           <DatePicker
             format="DD/MM/YYYY"
             dateAdapter={AdapterDayjs}
-            value={selectedDate}
+            value={dayjs(selectedDate)}
             onChange={handleDateChange}
           />
         </Box>

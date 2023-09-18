@@ -22,7 +22,7 @@ function SelectFlights(props) {
       currency: "AUD",
     },
     headers: {
-      "X-RapidAPI-Key": "57f1b4083cmsh5ede8c2e048c741p1e6f1ejsn0287d2d0be24",
+      "X-RapidAPI-Key": "d5d47b738amsh0218173db374270p186c18jsnae1665f158e0",
       "X-RapidAPI-Host": "priceline-com-provider.p.rapidapi.com",
     },
   };
@@ -33,6 +33,7 @@ function SelectFlights(props) {
       .request(options)
       .then((response) => {
         const apiFlightType = props.apiFlightType;
+        console.log(options.params.departure_date);
         console.log(response.data[apiFlightType]);
         setFlights(response.data[apiFlightType].results.result.itinerary_data);
         setisLoaded(true);
