@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# FlyTinerary
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  FlyTinerary is an essential tool for travellers looking to visualize their adventures, in a beautiful and simple way. Use this application to visualize your flight routes, search for real-time flight data and add selected flights to personal itineraries. 
 
-## Available Scripts
+*Version 1.0 release 2023.04.04*
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+Key Features:
+  * Search for any airport location, either as your departure or arrival airport. 
+  * Retrieve current and up to date flight information for your chosen date. (Round-Trip or One-Way)
+  * Visualize your journey!
+  * Add chosen flight data to custom itineraries
+  * See all your saved flights visually on the globe
+  * Remove flights, and update flight costs from within your itinerary
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Dependencies: 
+* Node JS
+* Express JS
+* React
+* Material UI
+* MySQL
+* RapidAPI : Priceline com Provider
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Motivation || Inspiration
+Organising a holiday is exciting, but often the planning is boring and repetitive. FlyTinerary aims to encourage adventure and reduce stress by providing a simple, no fuss UI which graphically visualizes your flights across the globe. Having all your flight information in one place and being able to update your flight information with ease, Flytinerary provides a simple, no-fuss approach to air travel. 
 
-### `npm test`
+## Requirements
+To run this code locally you will need:
+* [Node.js](https://nodejs.org/en "Node.js")
+* [React](https://react.dev/ "React")
+* [mySQL](https://www.mysql.com/ "mySQL")
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation || Getting Started
 
-### `npm run build`
+To run this code locally: 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Method 1: Github Clone
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+git clone https://github.com/iHeslop/FlyTinerary.git
+cd Flytinerary 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+// Install the Backend: 
+cd back-end
+npm install
 
-### `npm run eject`
+// Install the frontend:
+cd front-end
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Method 2: Docker Container (Frontend only)
+* [Docker Frontend](https://hub.docker.com/r/iheslop/flytinerary_frontend)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Once installed, both methods will require a mySQL Database:
+1. First create a .env file in the "flytinerary/backend" folder containing this information: 
+```
+DB_NAME=flytinerary
+DB_USER=*your user here*
+DB_PASSWORD=*your password here*
+DB_HOST=localhost
+DB_PORT=3306
+```
+2. In mySQL workbench, create a new schema called *flytinerary*.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+*Remember to update the DB_USER and the DB_PASSWORD in the .env file with your local user and password*
 
-## Learn More
+3. Execute the SQL query in the flytinerary-queries file in this repository to set up your initial database table. 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+4. FlyTinerary should be set up and ready to go! Just run ``` npm start ``` in both the back-end and front-end folders. If you can login/sign-up the database is working!
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Reference
+* [Priceline com Provider API](https://rapidapi.com/tipsters/api/priceline-com-provider "Priceline com Provider API")
