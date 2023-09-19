@@ -33,11 +33,8 @@ function SelectFlights(props) {
       .request(options)
       .then((response) => {
         const apiFlightType = props.apiFlightType;
-        console.log(options.params.departure_date);
-        console.log(response.data[apiFlightType]);
         setFlights(response.data[apiFlightType].results.result.itinerary_data);
         setisLoaded(true);
-        console.log(flights);
       })
       .catch((error) => {
         console.error(error);

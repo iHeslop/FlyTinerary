@@ -27,20 +27,25 @@ function LoginForm(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await axios.post(
-      "https://flytinerary-be-xfeq.onrender.com/users/signin",
-      {
-        email: email,
-        hashedPassword: password,
-      }
-    );
+    try {
+      const response = await axios.post(
+        "https://flytinerary-be-xfeq.onrender.com/users/signin",
+        {
+          email: email,
+          hashedPassword: password,
+        }
+      );
 
-    if (response.status === 200) {
-      const user = response.data.data;
-      props.onFNameChange(user.fname);
-      props.onUserIdChange(user.userId);
-      navigate("/home");
-    } else {
+      if (response.status === 200) {
+        const user = response.data.data;
+        props.onFNameChange(user.fname);
+        props.onUserIdChange(user.userId);
+        navigate("/home");
+      } else {
+        setErrorMessage("Invalid email or password! Try Again!");
+      }
+    } catch (error) {
+      console.error("Axios error:", error);
       setErrorMessage("Invalid email or password! Try Again!");
     }
   };
