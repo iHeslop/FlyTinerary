@@ -27,13 +27,11 @@ function LoginForm(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-
     const response = await axios.post(
       "https://flytinerary-be-xfeq.onrender.com/users/signin",
       {
         email: email,
-        hashedPassword: hashedPassword,
+        hashedPassword: password,
       }
     );
 
@@ -60,7 +58,6 @@ function LoginForm(props) {
       })
       .then((response) => {
         const newUserId = response.data.data.userId;
-        console.log(newUserId);
         props.onUserIdChange(newUserId);
       });
     navigate("/home");
