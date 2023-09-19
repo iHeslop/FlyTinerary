@@ -24,7 +24,7 @@ function SelectAirports(props) {
   //Get Airports data from Database
   useEffect(() => {
     axios
-      .get("https://flytinerary-be-xfeq.onrender.com/airports")
+      .get("https://flytinerary-be-xfeq.onrender.com/airports/")
       .then((response) => {
         setAirports(response.data.data);
       });
