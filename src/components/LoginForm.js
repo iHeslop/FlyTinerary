@@ -13,6 +13,7 @@ import FlightTakeoff from "@mui/icons-material/FlightTakeoff";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../fonts/Poppins-Medium.ttf";
+const bcrypt = require("bcryptjs");
 
 function LoginForm(props) {
   const [cardFlip, setCardFlip] = useState(false);
@@ -25,14 +26,19 @@ function LoginForm(props) {
   //Check if User is in database by email and password check
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await axios.get(
-      "https://flytinerary-be-xfeq.onrender.com/users"
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const response = await axios.post(
+      "https://flytinerary-be-xfeq.onrender.com/users/signin",
+      {
+        email: email,
+        hashedPassword: hashedPassword,
+      }
     );
-    const users = response.data.data;
-    const user = users.find(
-      (user) => user.email === email && user.password === password
-    );
-    if (user) {
+
+    if (response.status === 200) {
+      const user = response.data.data;
       props.onFNameChange(user.fname);
       props.onUserIdChange(user.userId);
       navigate("/home");
@@ -40,16 +46,16 @@ function LoginForm(props) {
       setErrorMessage("Invalid email or password! Try Again!");
     }
   };
-
   //Add User to Database on Sign Up
   const handleSignUp = async (event) => {
     event.preventDefault();
+    const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
     await axios
       .post("https://flytinerary-be-xfeq.onrender.com/users/create", {
         fname: props.fName,
         lname: lName,
         email: email,
-        password: password,
+        password: hashedPassword,
       })
       .then((response) => {
         const newUserId = response.data.data.userId;
