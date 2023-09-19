@@ -46,6 +46,7 @@ function LoginForm(props) {
       setErrorMessage("Invalid email or password! Try Again!");
     }
   };
+
   //Add User to Database on Sign Up
   const handleSignUp = async (event) => {
     event.preventDefault();
