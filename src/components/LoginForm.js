@@ -25,7 +25,9 @@ function LoginForm(props) {
   //Check if User is in database by email and password check
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await axios.get("http://localhost:4000/users");
+    const response = await axios.get(
+      "https://flytinerary-be-xfeq.onrender.com/users"
+    );
     const users = response.data.data;
     const user = users.find(
       (user) => user.email === email && user.password === password
@@ -43,7 +45,7 @@ function LoginForm(props) {
   const handleSignUp = async (event) => {
     event.preventDefault();
     await axios
-      .post("http://localhost:4000/users/create", {
+      .post("https://flytinerary-be-xfeq.onrender.com/users/create", {
         fname: props.fName,
         lname: lName,
         email: email,

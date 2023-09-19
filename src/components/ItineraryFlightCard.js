@@ -38,7 +38,9 @@ function ItineraryFlightCard(props) {
   const handleDeleteFromItinerary = async (event) => {
     event.preventDefault();
     await axios
-      .delete(`http://localhost:4000/flights/${props.flightId}`)
+      .delete(
+        `https://flytinerary-be-xfeq.onrender.com/flights/${props.flightId}`
+      )
       .then((response) => {
         console.log(response);
       });
@@ -49,9 +51,12 @@ function ItineraryFlightCard(props) {
   //Update flight price in database
   const handleSubmit = async () => {
     await axios
-      .put(`http://localhost:4000/flights/${props.flightId}`, {
-        price: flightPrice,
-      })
+      .put(
+        `https://flytinerary-be-xfeq.onrender.com/flights/${props.flightId}`,
+        {
+          price: flightPrice,
+        }
+      )
       .then((response) => {
         console.log(response);
       });

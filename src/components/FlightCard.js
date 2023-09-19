@@ -27,7 +27,7 @@ function FlightCard(props) {
   const handleAddToItinerary = async (event) => {
     event.preventDefault();
     await axios
-      .post("http://localhost:4000/flights/create", {
+      .post("https://flytinerary-be-xfeq.onrender.com/flights/create", {
         name: props.name,
         userId: props.userId,
         price: props.price,

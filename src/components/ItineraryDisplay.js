@@ -19,7 +19,7 @@ function ItineraryDisplay(props) {
   useEffect(() => {
     async function getDisplayFlights() {
       const response = await axios.get(
-        `http://localhost:4000/flights/${userId}`
+        `https://flytinerary-be-xfeq.onrender.com/flights/${userId}`
       );
       const myFlights = response.data.data;
       setDisplayFlights(myFlights);
@@ -32,7 +32,7 @@ function ItineraryDisplay(props) {
     console.log("Fetching Airports");
     async function fetchFlights() {
       const response = await axios.get(
-        `http://localhost:4000/flights/${userId}`
+        `https://flytinerary-be-xfeq.onrender.com/flights/${userId}`
       );
       const myDataFlights = response.data.data;
       const updatedFlights = myDataFlights.map((flight) => {
@@ -54,10 +54,10 @@ function ItineraryDisplay(props) {
         const updatedAirports = [];
         for (const [depIata, arrIata] of myFlights) {
           const depResponse = await axios.get(
-            `http://localhost:4000/airports/${depIata}`
+            `https://flytinerary-be-xfeq.onrender.com/airports/${depIata}`
           );
           const arrResponse = await axios.get(
-            `http://localhost:4000/airports/${arrIata}`
+            `https://flytinerary-be-xfeq.onrender.com/airports/${arrIata}`
           );
           const flight = {
             depAirport: {
