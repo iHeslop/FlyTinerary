@@ -117,7 +117,6 @@ function SelectAirports(props) {
   const handleDateChange = (date) => {
     const formattedDate = dayjs(date).format("YYYY-MM-DD");
     setselectedDate(formattedDate);
-    console.log(formattedDate);
   };
 
   //Set Flight Type for API call

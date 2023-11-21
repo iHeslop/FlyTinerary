@@ -29,7 +29,6 @@ function ItineraryDisplay(props) {
 
   // Code for Displaying Saved Flights on Globe
   useEffect(() => {
-    console.log("Fetching Airports");
     async function fetchFlights() {
       const response = await axios.get(
         `https://flytinerary-be-xfeq.onrender.com/flights/${userId}`
@@ -49,7 +48,6 @@ function ItineraryDisplay(props) {
 
   useEffect(() => {
     async function fetchAirports() {
-      console.log("Fetching Airports");
       if (myFlights.length > 0) {
         const updatedAirports = [];
         for (const [depIata, arrIata] of myFlights) {
@@ -113,7 +111,7 @@ function ItineraryDisplay(props) {
             >
               Saved Flights:
             </Typography>
-            <Grid wrap="wrap">
+            <Grid wrap="wrap" container>
               {Object.keys(displayFlights).map((key) => (
                 <Grid item xs={12} md={12} lg={12} key={key}>
                   <ItineraryFlightCard

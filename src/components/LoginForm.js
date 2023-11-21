@@ -50,6 +50,24 @@ function LoginForm(props) {
     }
   };
 
+  //Test User Enter
+  const handleTest = async (event) => {
+    event.preventDefault();
+    await axios
+      .post("https://flytinerary-be-xfeq.onrender.com/users/create", {
+        fname: "Trial User",
+        lname: "lname",
+        email: "email",
+        password: "test",
+      })
+      .then((response) => {
+        const newUserId = response.data.data.userId;
+        props.onUserIdChange(newUserId);
+        props.onFNameChange("Trial User");
+      });
+    navigate("/home");
+  };
+
   //Add User to Database on Sign Up
   const handleSignUp = async (event) => {
     event.preventDefault();
@@ -174,6 +192,17 @@ function LoginForm(props) {
               </Button>
               <Typography>{errorMessage}</Typography>
             </Box>
+            <Box component="form" noValidate onSubmit={handleTest}>
+              <Button
+                color="secondary"
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 1, mb: 1, fontFamily: "Poppins", fontSize: "15px" }}
+              >
+                Trial
+              </Button>
+            </Box>
           </Box>
           <Box
             sx={{
@@ -286,6 +315,17 @@ function LoginForm(props) {
                 sx={{ mt: 3, mb: 2, fontFamily: "Poppins", fontSize: "15px" }}
               >
                 Sign Up
+              </Button>
+            </Box>
+            <Box component="form" noValidate onSubmit={handleTest}>
+              <Button
+                color="secondary"
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 1, mb: 1, fontFamily: "Poppins", fontSize: "15px" }}
+              >
+                Trial
               </Button>
             </Box>
           </Box>
